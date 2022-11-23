@@ -6,6 +6,7 @@ using UnityEngine;
 public class CottonPrefabController : MonoBehaviour
 {
     public int numberOfCottons;
+    public List<GameObject> cottons;
 
     private void Awake()
     {
@@ -15,6 +16,7 @@ public class CottonPrefabController : MonoBehaviour
             if (t.gameObject.name == "Cotton")
             {
                 numberOfCottons++;
+                cottons.Add(t.gameObject);
             }
         }
     }

@@ -17,10 +17,19 @@ public class PlayerPickUpController : MonoBehaviour
 
     [Header("Rotation variables")]
     public float rotationSensitivity = 200f;
-    
+
+    private bool isAbleToPickup;
     private GameObject heldObject;
     private Rigidbody heldRB;
     [SerializeField] private Transform heldObjTransform;
+
+    private StationInterface currentStation;
+
+    private void Awake()
+    {
+        isAbleToPickup = false;
+    }
+
     private void Update()
     {
         //Creates a raycast -> on collision with gameObject, pick it up
@@ -31,13 +40,15 @@ public class PlayerPickUpController : MonoBehaviour
                 if (Physics.Raycast(camTransform.position, camTransform.forward, out RaycastHit raycastHit, pickUpDistance,
                         pickUpMask))
                 {
-                    if (raycastHit.transform.gameObject.CompareTag("PickUp"))
+                    if (raycastHit.transform.gameObject.CompareTag("PickUp") && isAbleToPickup)
                     {
                         PickUpObject(raycastHit.transform.gameObject);
                     }
                     if (raycastHit.transform.gameObject.TryGetComponent(out StationInterface sI))
                     {
                         sI.lockCamera(playerMovement);
+                        isAbleToPickup = true;
+                        currentStation = sI;
                     }
                 }
             }
@@ -71,6 +82,11 @@ public class PlayerPickUpController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             playerMovement.isLocked = false;
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            // currentStation.reset();
+            currentStation.completeStation();
         }
     }
 
