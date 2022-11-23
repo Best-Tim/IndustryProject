@@ -35,6 +35,10 @@ public class PlayerPickUpController : MonoBehaviour
                     {
                         PickUpObject(raycastHit.transform.gameObject);
                     }
+                    if (raycastHit.transform.gameObject.TryGetComponent(out StationInterface sI))
+                    {
+                        sI.lockCamera(playerMovement);
+                    }
                 }
             }
         }
@@ -62,6 +66,10 @@ public class PlayerPickUpController : MonoBehaviour
             {
                 DropObject();
             }
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            playerMovement.isLocked = false;
         }
     }
 
