@@ -65,7 +65,6 @@ public class PlayerPickUpController : MonoBehaviour
             if (Input.GetMouseButtonUp(0))
             {
                 playerCam.isLocked = false;
-                playerMovement.isLocked = false;
                 DropObject();
             }
         }
