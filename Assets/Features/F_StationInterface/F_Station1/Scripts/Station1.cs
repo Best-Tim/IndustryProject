@@ -22,6 +22,10 @@ public class Station1 : StationInterface
     {
         for (int i = 0; i < currentCottons.Count; i++)
         {
+            for (int j = 0; j < currentCottons[i].GetComponent<CottonPrefabController>().cottons.Count; j++)
+            {
+                Destroy(currentCottons[i].GetComponent<CottonPrefabController>().cottons[j]);
+            }
             Destroy(currentCottons[i]);
         }
         Destroy(currentZinc);
@@ -31,7 +35,7 @@ public class Station1 : StationInterface
     void SpawnObjects()
     {
         currentCottons = new List<GameObject>();
-        currentZinc = new GameObject();
+        // currentZinc = new GameObject();
         foreach (Transform t in cottonParent.transform.GetComponentInChildren<Transform>())
         {
             GameObject g = Instantiate(Cottons[Random.Range(0, Cottons.Count)], t.position, Quaternion.identity, gameObject.transform.parent);
