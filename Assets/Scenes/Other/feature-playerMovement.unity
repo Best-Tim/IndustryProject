@@ -273,6 +273,50 @@ PrefabInstance:
       propertyPath: m_Name
       value: Station1
       objectReference: {fileID: 0}
+    - target: {fileID: 5139109353852529588, guid: 1fefc1028f4cfec4eb55b5d72c1e2a42, type: 3}
+      propertyPath: zincBowl
+      value: 
+      objectReference: {fileID: 993211570414031129, guid: 8d4cc191d7e838540924044580cbea32, type: 3}
+    - target: {fileID: 5139109353852529588, guid: 1fefc1028f4cfec4eb55b5d72c1e2a42, type: 3}
+      propertyPath: Zincs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139109353852529588, guid: 1fefc1028f4cfec4eb55b5d72c1e2a42, type: 3}
+      propertyPath: Cottons.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139109353852529588, guid: 1fefc1028f4cfec4eb55b5d72c1e2a42, type: 3}
+      propertyPath: Cottons.Array.data[0]
+      value: 
+      objectReference: {fileID: 4301548904360071389, guid: 7aae053257576204fafe2fd7d88dc339, type: 3}
+    - target: {fileID: 5139109353852529588, guid: 1fefc1028f4cfec4eb55b5d72c1e2a42, type: 3}
+      propertyPath: Cottons.Array.data[1]
+      value: 
+      objectReference: {fileID: 1175093004856234708, guid: 73c005f58942f1244b8684708323c90c, type: 3}
+    - target: {fileID: 5139109353852529588, guid: 1fefc1028f4cfec4eb55b5d72c1e2a42, type: 3}
+      propertyPath: Cottons.Array.data[2]
+      value: 
+      objectReference: {fileID: 3618213122140758255, guid: 56b53eca72e4ef847ace2aec4e6494cd, type: 3}
+    - target: {fileID: 5139109353852529588, guid: 1fefc1028f4cfec4eb55b5d72c1e2a42, type: 3}
+      propertyPath: Cottons.Array.data[3]
+      value: 
+      objectReference: {fileID: 1175093004856234708, guid: 7693f8a456924134999b627ca4873aed, type: 3}
+    - target: {fileID: 5139109353852529588, guid: 1fefc1028f4cfec4eb55b5d72c1e2a42, type: 3}
+      propertyPath: Cottons.Array.data[4]
+      value: 
+      objectReference: {fileID: 1175093004856234708, guid: 7693f8a456924134999b627ca4873aed, type: 3}
+    - target: {fileID: 5139109353852529588, guid: 1fefc1028f4cfec4eb55b5d72c1e2a42, type: 3}
+      propertyPath: Cottons.Array.data[5]
+      value: 
+      objectReference: {fileID: 1175093004856234708, guid: 7693f8a456924134999b627ca4873aed, type: 3}
+    - target: {fileID: 5139109353852529588, guid: 1fefc1028f4cfec4eb55b5d72c1e2a42, type: 3}
+      propertyPath: Cottons.Array.data[6]
+      value: 
+      objectReference: {fileID: 1175093004856234708, guid: 7693f8a456924134999b627ca4873aed, type: 3}
+    - target: {fileID: 5139109353852529588, guid: 1fefc1028f4cfec4eb55b5d72c1e2a42, type: 3}
+      propertyPath: Cottons.Array.data[7]
+      value: 
+      objectReference: {fileID: 1175093004856234708, guid: 7693f8a456924134999b627ca4873aed, type: 3}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fefc1028f4cfec4eb55b5d72c1e2a42, type: 3}

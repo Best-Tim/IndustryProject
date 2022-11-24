@@ -5,19 +5,19 @@ using UnityEngine;
 
 public class CottonPrefabController : MonoBehaviour
 {
-    public int numberOfCottons;
-    public List<GameObject> cottons;
+    public GameObject matToSpawn;
+    public int numberOfMaterials;
+    public MATERIALS Material;
+    public List<GameObject> materials;
 
     private void Awake()
     {
-        numberOfCottons = 0;
-        foreach (Transform t in gameObject.transform)
+        numberOfMaterials = UnityEngine.Random.Range(1,4);
+        for (int i = 0; i < numberOfMaterials; i++)
         {
-            if (t.gameObject.name == "Cotton")
-            {
-                numberOfCottons++;
-                cottons.Add(t.gameObject);
-            }
+            GameObject g = Instantiate(matToSpawn, gameObject.transform.position + new Vector3(0, .2f, 0), Quaternion.identity, this.transform);
+            materials.Add(g);
+            Material = g.GetComponent<Identifier>().materials;
         }
     }
 }
