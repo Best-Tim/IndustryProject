@@ -10,6 +10,8 @@ public class ZincScale : MonoBehaviour
     public int scale;
     public int currentCottonCount;
 
+    public GameObject explosionVX;
+
     private void Awake()
     {
         scale = UnityEngine.Random.Range(1, 2);
@@ -28,13 +30,10 @@ public class ZincScale : MonoBehaviour
             {
                 currentCottonCount++;
             }
-            if (identifier.materials == MATERIALS.TUNGSTEIN)
+            else 
             {
-                //explosion
-            }
-            if (identifier.materials == MATERIALS.TITANUM)
-            {
-                //fire
+                Destroy(other.gameObject);
+                Instantiate(explosionVX, gameObject.transform.position + new Vector3(0,.5f,0), Quaternion.identity);
             }
         }
     }
