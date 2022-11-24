@@ -82,6 +82,7 @@ public class PlayerPickUpController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             playerMovement.isLocked = false;
+            isAbleToPickup = false;
         }
         if (Input.GetKeyDown(KeyCode.E))
         {

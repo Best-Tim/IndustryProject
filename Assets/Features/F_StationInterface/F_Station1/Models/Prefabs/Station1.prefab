@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 141707734145198770}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.20000002, y: 0.6, z: 0}
-  m_LocalScale: {x: 0.080000006, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1262693073783643618}
@@ -89,6 +89,8 @@ MonoBehaviour:
   Zincs:
   - {fileID: 993211570414031129, guid: 8d4cc191d7e838540924044580cbea32, type: 3}
   - {fileID: 993211570414031129, guid: ceef081d2a2579b4b9dec1de23b81263, type: 3}
+  currentZinc: {fileID: 0}
+  currentCottons: []
   cottonParent: {fileID: 5300338134378251463}
   zincLocation: {fileID: 7293356553442796333}
 --- !u!33 &8373058065240822916
@@ -275,7 +277,7 @@ Transform:
   m_GameObject: {fileID: 5282118210538843084}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.40000004, y: 0.6, z: 0}
-  m_LocalScale: {x: 0.080000006, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1262693073783643618}
@@ -348,7 +350,7 @@ Transform:
   m_GameObject: {fileID: 7457157943951503869}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.6, z: 0}
-  m_LocalScale: {x: 0.080000006, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1262693073783643618}
