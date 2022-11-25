@@ -32,7 +32,13 @@ public class PlayerPickUpController : MonoBehaviour
 
     private void Update()
     {
-        //Creates a raycast -> on collision with gameObject, pick it up
+        if (!playerMovement.isInMenu) {
+            PlayerInputs();
+        }
+    }
+
+    private void PlayerInputs() {
+                //Creates a raycast -> on collision with gameObject, pick it up
         if (Input.GetMouseButtonDown(0))
         {
             if (heldObject == null)

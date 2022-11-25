@@ -12,15 +12,17 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 velocity;
 
     public bool isLocked;
+    public bool isInMenu;
 
     private void Awake()
     {
         isLocked = false;
+        isInMenu = false;
     }
 
     private void Update()
     {
-        if (!isLocked)
+        if (!isLocked && !isInMenu)
         {
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");

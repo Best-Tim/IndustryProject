@@ -8,8 +8,11 @@ using UnityEngine.SceneManagement;
 public class GameMenu_EventHandler : MonoBehaviour {
     [SerializeField] private GameObject[] canvasList;
     [SerializeField] private bool IsMenuActive = false;
+    [SerializeField] private PlayerMovement _playerMovement;
+    [SerializeField] private PlayerCam _playerCam;
     public void FixedUpdate() {
         if (Input.GetKeyUp(KeyCode.Escape)) {
+            LockPlayer();
             ActivateIngameMenu();
         }
     }
@@ -32,12 +35,23 @@ public class GameMenu_EventHandler : MonoBehaviour {
     } 
     
     public void DeactivateIngameMenu() {
+        UnlockPlayer();
         IsMenuActive = !IsMenuActive;
         for (int i = 0; i < canvasList.Length; i++) {
             canvasList[i].SetActive(false);
         }
-    } 
-    
+    }
+
+    public void LockPlayer() {
+        Cursor.lockState = CursorLockMode.None;
+        _playerMovement.isInMenu = true;
+        _playerCam.isLocked = true;
+    }
+    public void UnlockPlayer() {
+        Cursor.lockState = CursorLockMode.Locked;
+        _playerMovement.isInMenu = false;
+        _playerCam.isLocked = false;
+    }
     public void BackButtonCanvas() {
         ActivateIngameMenu();
     }

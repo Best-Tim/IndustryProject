@@ -280,6 +280,7 @@ MonoBehaviour:
   speed: 12
   gravity: -9.81
   isLocked: 0
+  isInMenu: 0
 --- !u!114 &500539540643169389
 MonoBehaviour:
   m_ObjectHideFlags: 0
