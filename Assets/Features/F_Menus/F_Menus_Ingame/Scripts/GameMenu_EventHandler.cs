@@ -44,11 +44,13 @@ public class GameMenu_EventHandler : MonoBehaviour {
 
     public void LockPlayer() {
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         _playerMovement.isInMenu = true;
         _playerCam.isLocked = true;
     }
     public void UnlockPlayer() {
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         _playerMovement.isInMenu = false;
         _playerCam.isLocked = false;
     }
@@ -71,6 +73,7 @@ public class GameMenu_EventHandler : MonoBehaviour {
     }
 
     public void Event_Exit() {
+        Cursor.visible = true;
         SceneManager.LoadScene("Main_Menu");
     }
 
