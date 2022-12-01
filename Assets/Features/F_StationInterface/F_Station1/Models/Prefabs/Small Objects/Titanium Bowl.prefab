@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   matToSpawn: {fileID: 2826992653883017595, guid: 8bf582b60d9cea3478909f94458b732f, type: 3}
   numberOfMaterials: 0
-  MATERIALS: 0
+  Material: 2
   materials: []
 --- !u!1 &4620652752227880298
 GameObject:

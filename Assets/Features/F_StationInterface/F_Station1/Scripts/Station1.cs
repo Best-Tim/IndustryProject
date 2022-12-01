@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class Station1 : StationInterface
 {
-    public List<GameObject> Cottons = new List<GameObject>();
+    public List<GameObject> Materials = new List<GameObject>();
     public GameObject zincBowl;
 
     public ZincScale currentZinc;
-    public List<GameObject> currentCottons;
+    public List<GameObject> currentMaterials;
 
     public GameObject cottonParent;
     public Transform zincLocation;
@@ -26,27 +26,27 @@ public class Station1 : StationInterface
     }
     public override void reset()
     {
-        for (int i = 0; i < currentCottons.Count; i++)
+        for (int i = 0; i < currentMaterials.Count; i++)
         {
-            for (int j = 0; j < currentCottons[i].GetComponent<CottonPrefabController>().materials.Count; j++)
+            for (int j = 0; j < currentMaterials[i].GetComponent<CottonPrefabController>().materials.Count; j++)
             {
-                Destroy(currentCottons[i].GetComponent<CottonPrefabController>().materials[j]);
+                Destroy(currentMaterials[i].GetComponent<CottonPrefabController>().materials[j]);
             }
-            Destroy(currentCottons[i]);
+            Destroy(currentMaterials[i]);
         }
         Destroy(currentZinc.gameObject);
         SpawnObjects();
     }
     void SpawnObjects()
     {
-        currentCottons = new List<GameObject>();
+        currentMaterials = new List<GameObject>();
         // currentZinc = new GameObject();
         foreach (Transform t in cottonParent.transform.GetComponentInChildren<Transform>())
         {
-            int i = Random.Range(0, Cottons.Count);
-            GameObject g = Instantiate(Cottons[i], t.position, Quaternion.identity, gameObject.transform.parent); 
-            Cottons.RemoveAt(i);
-            currentCottons.Add(g);
+            int i = Random.Range(0, Materials.Count);
+            GameObject g = Instantiate(Materials[i], t.position, Quaternion.identity, gameObject.transform.parent); 
+            Materials.RemoveAt(i);
+            currentMaterials.Add(g);
         }
         GameObject zinc = Instantiate(zincBowl, zincLocation.position, Quaternion.identity, gameObject.transform.parent);
         currentZinc = zinc.GetComponent<ZincScale>();
@@ -54,7 +54,7 @@ public class Station1 : StationInterface
     void FindRightAnswer()
     {
         CottonPrefabController toBeChecked = null;
-        foreach (var item in currentCottons)
+        foreach (var item in currentMaterials)
         {
             if (item.GetComponent<CottonPrefabController>().Material == MATERIALS.COTTON)
             {
@@ -63,7 +63,7 @@ public class Station1 : StationInterface
         }
         if (toBeChecked != null)
         {
-            rightAnswer = CottonSwitch(toBeChecked.numberOfMaterials, currentZinc.scale);
+            rightAnswer = CottonSwitch(currentZinc.scale);
         }
         if (rightAnswer == 0)
         {
@@ -71,36 +71,26 @@ public class Station1 : StationInterface
             return;
         }
     }
-    void WinCondition()
+    public void WinCondition()
     {
         if (currentZinc.currentCottonCount == rightAnswer)
         {
             completeStation();
+            Debug.Log("I won");
         }
     }
-    int CottonSwitch(int i, int scale)
+    int CottonSwitch(int scale)
     {
-        switch (i, scale)
+        switch (scale)
         {
-            case (1,1):
-                return 1;
-            case (2,1):
-                return 1;
-            case (3,1):
-                return 2;
-            case (4,1):
+            case (1):
                 return 3;
-
-            case (1, 2):
-                return 1;
-            case (2, 2):
-                return 2;
-            case (3, 2):
-                return 3;
-            case (4, 2):
+            case (2):
                 return 4;
+            case (3):
+                return 5;
         }
-        return 0;
+        return 6;
     }
 
 }

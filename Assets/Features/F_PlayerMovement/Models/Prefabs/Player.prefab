@@ -296,7 +296,7 @@ MonoBehaviour:
   camTransform: {fileID: 7934430208378381640}
   playerCam: {fileID: 4208644720823996936}
   playerMovement: {fileID: 2098671024162970801}
-  pickUpDistance: 2
+  pickUpDistance: 4
   pickUpForce: 150
   pickUpMask:
     serializedVersion: 2

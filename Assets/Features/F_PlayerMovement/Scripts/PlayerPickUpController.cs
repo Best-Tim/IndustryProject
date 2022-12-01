@@ -20,6 +20,7 @@ public class PlayerPickUpController : MonoBehaviour
 
     private bool isAbleToPickup;
     private GameObject heldObject;
+    public GameObject rotateObject;
     private Rigidbody heldRB;
     [SerializeField] private Transform heldObjTransform;
 
@@ -28,6 +29,7 @@ public class PlayerPickUpController : MonoBehaviour
     private void Awake()
     {
         isAbleToPickup = false;
+        rotateObject = null;
     }
 
     private void Update()
@@ -56,6 +58,10 @@ public class PlayerPickUpController : MonoBehaviour
                         isAbleToPickup = true;
                         currentStation = sI;
                     }
+                    if (raycastHit.transform.gameObject.CompareTag("Rotatable") && isAbleToPickup)
+                    {
+                        rotateObject = raycastHit.transform.gameObject;
+                    }
                 }
             }
         }
@@ -66,18 +72,12 @@ public class PlayerPickUpController : MonoBehaviour
             //Rotates the held object when right click is pressed
             if (Input.GetMouseButton(1))
             {
-                float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * rotationSensitivity;
-                float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * rotationSensitivity;
-            
-                heldObject.transform.RotateAroundLocal(camTransform.up, Mathf.Deg2Rad * mouseX);
-                heldObject.transform.RotateAroundLocal(camTransform.right, -Mathf.Deg2Rad * mouseY);
-                playerCam.isLocked = true;
-                playerMovement.isLocked = true;
+                RotateItem(heldObject);
             }
             if (Input.GetMouseButtonUp(1))
             {
                 playerCam.isLocked = false;
-                playerMovement.isLocked = false;
+                // playerMovement.isLocked = false;
             }
             if (Input.GetMouseButtonUp(0))
             {
@@ -95,6 +95,39 @@ public class PlayerPickUpController : MonoBehaviour
             // currentStation.reset();
             currentStation.completeStation();
         }
+
+        if (rotateObject != null && heldObject == null)
+        {
+            if (Input.GetMouseButton(1))
+            {
+                RotateRotatable(rotateObject);
+            }
+            if (Input.GetMouseButtonUp(1))
+            {
+                playerCam.isLocked = false;
+                rotateObject = null;
+            }
+        }
+    }
+
+    public void RotateItem(GameObject gameObject)
+    {
+        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * rotationSensitivity;
+        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * rotationSensitivity;
+        
+        gameObject.transform.RotateAroundLocal(camTransform.up, Mathf.Deg2Rad * mouseX);
+        gameObject.transform.RotateAroundLocal(camTransform.right, -Mathf.Deg2Rad * mouseY);
+        playerCam.isLocked = true;
+        playerMovement.isLocked = true;
+    }
+    
+    public void RotateRotatable(GameObject gameObject)
+    {
+        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * rotationSensitivity;
+        
+        gameObject.transform.RotateAroundLocal(camTransform.up, Mathf.Deg2Rad * mouseX);
+        playerCam.isLocked = true;
+        playerMovement.isLocked = true;
     }
 
     //Pick up mechanic - disables physics
@@ -110,9 +143,9 @@ public class PlayerPickUpController : MonoBehaviour
             heldObject = pickUpObject;
         }
     }
-    
+
     //Drops an object - enables physics
-    void DropObject()
+    public void DropObject()
     {
         heldRB.useGravity = true;
         heldRB.drag = 1;

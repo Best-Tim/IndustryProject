@@ -12,12 +12,25 @@ public class CottonPrefabController : MonoBehaviour
 
     private void Awake()
     {
-        numberOfMaterials = UnityEngine.Random.Range(1,4);
-        for (int i = 0; i < numberOfMaterials; i++)
+        if (Material != MATERIALS.COTTON)
         {
-            GameObject g = Instantiate(matToSpawn, gameObject.transform.position + new Vector3(0, .2f, 0), Quaternion.identity, this.transform);
-            materials.Add(g);
-            Material = g.GetComponent<Identifier>().materials;
+            numberOfMaterials = UnityEngine.Random.Range(1,4);
+            for (int i = 0; i < numberOfMaterials; i++)
+            {
+                GameObject g = Instantiate(matToSpawn, gameObject.transform.position + new Vector3(0, .2f, 0), Quaternion.identity, this.transform);
+                materials.Add(g);
+                Material = g.GetComponent<Identifier>().materials;
+            }
+        }
+        else
+        {
+            // numberOfMaterials = 5;
+            // for (int i = 0; i < numberOfMaterials; i++)
+            // {
+            //     GameObject g = Instantiate(matToSpawn, gameObject.transform.position + new Vector3(0, .2f, 0), Quaternion.identity, this.transform);
+            //     materials.Add(g);
+            //     Material = g.GetComponent<Identifier>().materials;
+            // }
         }
     }
 }
