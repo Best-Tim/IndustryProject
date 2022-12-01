@@ -6,7 +6,7 @@ using UnityEngine;
 public class Station1 : StationInterface
 {
     public List<GameObject> Materials = new List<GameObject>();
-    public GameObject zincBowl;
+    public List<GameObject> zincBowls;
 
     public ZincScale currentZinc;
     public List<GameObject> currentMaterials;
@@ -48,7 +48,7 @@ public class Station1 : StationInterface
             Materials.RemoveAt(i);
             currentMaterials.Add(g);
         }
-        GameObject zinc = Instantiate(zincBowl, zincLocation.position, Quaternion.identity, gameObject.transform.parent);
+        GameObject zinc = Instantiate(zincBowls[Random.Range(0,zincBowls.Count)], zincLocation.position, Quaternion.identity, gameObject.transform.parent);
         currentZinc = zinc.GetComponent<ZincScale>();
     }
     void FindRightAnswer()

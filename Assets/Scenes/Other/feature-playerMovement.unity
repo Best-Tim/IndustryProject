@@ -286,6 +286,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5139109353852529588, guid: 1fefc1028f4cfec4eb55b5d72c1e2a42, type: 3}
+      propertyPath: zincBowls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139109353852529588, guid: 1fefc1028f4cfec4eb55b5d72c1e2a42, type: 3}
       propertyPath: Cottons.Array.data[0]
       value: 
       objectReference: {fileID: 4301548904360071389, guid: 7aae053257576204fafe2fd7d88dc339, type: 3}
@@ -317,6 +321,10 @@ PrefabInstance:
       propertyPath: Cottons.Array.data[7]
       value: 
       objectReference: {fileID: 1175093004856234708, guid: 7693f8a456924134999b627ca4873aed, type: 3}
+    - target: {fileID: 5139109353852529588, guid: 1fefc1028f4cfec4eb55b5d72c1e2a42, type: 3}
+      propertyPath: zincBowls.Array.data[2]
+      value: 
+      objectReference: {fileID: 993211570414031129, guid: 529d1afda2f3b3544bb4941aa7d4e93f, type: 3}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fefc1028f4cfec4eb55b5d72c1e2a42, type: 3}
@@ -339,6 +347,10 @@ PrefabInstance:
     - target: {fileID: 7713835463156068821, guid: 48c670bff1796e4469f5126d4b831304, type: 3}
       propertyPath: m_Name
       value: Menu_Ingame_Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7713835463156068821, guid: 48c670bff1796e4469f5126d4b831304, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7713835463156068822, guid: 48c670bff1796e4469f5126d4b831304, type: 3}
       propertyPath: _playerCam
