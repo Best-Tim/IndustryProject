@@ -15,6 +15,9 @@ public class Station1 : StationInterface
     public Transform zincLocation;
 
     private int rightAnswer = 0;
+
+    public CheckWinCondition button;
+    private Color colorToWin;
     private void Start()
     {
        SpawnObjects();
@@ -22,7 +25,11 @@ public class Station1 : StationInterface
     }
     void FixedUpdate()
     {
-        WinCondition();
+        if (button.isPressed)
+        {
+            WinCondition();
+            button.isPressed = false;
+        }
     }
     public override void reset()
     {
@@ -71,12 +78,27 @@ public class Station1 : StationInterface
             return;
         }
     }
-    public void WinCondition()
+    public override void WinCondition()
     {
         if (currentZinc.currentCottonCount == rightAnswer)
         {
-            completeStation();
-            Debug.Log("I won");
+            if (rightAnswer == 3 && currentZinc.currentColor == Color.red)
+            {
+                completeStation();
+                Debug.Log("I won R");
+
+            }
+            if (rightAnswer == 4 && currentZinc.currentColor == Color.blue)
+            {
+                completeStation();
+                Debug.Log("I won B");
+
+            }
+            if (rightAnswer == 5 && currentZinc.currentColor == Color.green)
+            {
+                completeStation();
+                Debug.Log("I won G");
+            }
         }
     }
     int CottonSwitch(int scale)

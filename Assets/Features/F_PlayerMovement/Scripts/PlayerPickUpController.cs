@@ -60,6 +60,11 @@ public class PlayerPickUpController : MonoBehaviour
                         isAbleToPickup = true;
                         currentStation = sI;
                     }
+
+                    if (raycastHit.transform.gameObject.CompareTag("FinishButton") && isAbleToPickup && raycastHit.transform.gameObject.TryGetComponent(out CheckWinCondition checkWinCondition))
+                    {
+                        checkWinCondition.isPressed = true;
+                    }
                 }
             }
             //To be able to rotate static items (e.g. rotating a valve/stiring a handle etc.)

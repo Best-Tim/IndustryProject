@@ -23,19 +23,24 @@ public class ZincScale : MonoBehaviour
     private float stiringCounter;
     
     public float changeColorRate = 3;
-    public Color color1, color2, color3, color4;
+    private Color color1, color2, color3;
     private List<Color> colors;
+    public Color currentColor;
     
 
     private void Awake()
     {
         pickUpController = FindObjectOfType<PlayerPickUpController>();
         isStiring = false;
+        currentColor = Color.white;
         colors = new List<Color>();
+        color1 = Color.blue;
+        color2 = Color.red;
+        color3 = Color.green;
+        
         colors.Add(color1);
         colors.Add(color2);
         colors.Add(color3);
-        colors.Add(color4);
     }
 
     private void Update()
@@ -43,7 +48,6 @@ public class ZincScale : MonoBehaviour
         if (isStiring)
         {
             stiringCounter += Time.deltaTime;
-            Debug.Log(stiringCounter);
             if (stiringCounter >= changeColorRate)
             {
                 RandomizedColor();
@@ -58,6 +62,7 @@ public class ZincScale : MonoBehaviour
         foreach (var cotton in currentCottons)
         {
             cotton.GetComponent<MeshRenderer>().material.color = colors[random];
+            currentColor = colors[random];
         }
     }
 

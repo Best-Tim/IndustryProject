@@ -13,6 +13,10 @@ public abstract class StationInterface : MonoBehaviour
         
     }
 
+    public virtual void WinCondition()
+    {
+        
+    }
     public void completeStation()
     {
         isComplete = true;
