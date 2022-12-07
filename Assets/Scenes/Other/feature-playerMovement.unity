@@ -411,6 +411,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Station1
       objectReference: {fileID: 0}
+    - target: {fileID: 7157536362487579420, guid: 1fefc1028f4cfec4eb55b5d72c1e2a42, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fefc1028f4cfec4eb55b5d72c1e2a42, type: 3}
