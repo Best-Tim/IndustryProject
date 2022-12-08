@@ -9,11 +9,8 @@ public abstract class StationInterface : MonoBehaviour
     public bool isComplete = false;
 
     public virtual void reset() { }
+    public virtual void WinCondition() { }
 
-    public virtual void WinCondition()
-    {
-        
-    }
     public void completeStation()
     {
         isComplete = true;
@@ -24,5 +21,4 @@ public abstract class StationInterface : MonoBehaviour
         player.gameObject.transform.position = playerPosition.transform.position;
         player.isLocked = true;
     }
-    public virtual void WinCondition() { }
 }
