@@ -6,11 +6,14 @@ using UnityEngine;
 public class ClockHand : MonoBehaviour
 {
     public int hourClock;
-    private int[] startingPos = { 0, 90, 180, 270 };
     public int random;
-    private bool buttonPressed = false;
     public bool startClock = false;
 
+    [SerializeField]
+    private int rotationSpeed = 200;
+    private int[] startingPos = { 0, 90, 180, 270 };
+
+    private bool buttonPressed = false;
     void clockHandInit()
     {
         random = UnityEngine.Random.Range(0, 3);
@@ -30,7 +33,7 @@ public class ClockHand : MonoBehaviour
     {
         if (!buttonPressed && startClock)
         {
-            Rotate(20);
+            Rotate(rotationSpeed);
 
             if (Mathf.Round(gameObject.transform.eulerAngles.z) % 30 == 0)
             {

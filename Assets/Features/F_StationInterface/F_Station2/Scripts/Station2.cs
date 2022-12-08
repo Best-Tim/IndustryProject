@@ -29,15 +29,9 @@ public class Station2 : StationInterface
     }
     private void Update()
     {
-        //remove inputs
-        if (Input.GetKey(KeyCode.P))
-        {
-            this.reset();
-        }
         if (Input.GetKeyDown(KeyCode.Y))
         {
             hand.StopLoop();
-
         }
         if (Input.GetKeyUp(KeyCode.Y))
         {
@@ -51,6 +45,7 @@ public class Station2 : StationInterface
             }
             else
             {
+                green.MakeRed();
                 //explosion
             }
         }
