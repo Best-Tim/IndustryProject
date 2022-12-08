@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TutorialManager : MonoBehaviour {
     
@@ -32,7 +33,10 @@ public class TutorialManager : MonoBehaviour {
     [Header("Text for popup menus")] [SerializeField]
     private List<string> popupTextList;
 
+    PlayerCam playerCam;
+
     private void Start() {
+        playerCam = FindObjectOfType<PlayerCam>();
         popUpIndex = 0;
         keysPressed = new List<string>();
         targetsLookedAt = new List<GameObject>();
@@ -52,7 +56,8 @@ public class TutorialManager : MonoBehaviour {
         }
     }
 
-    void Update() {
+    void Update() 
+    {
         for (int i = 0; i < popup_holder.childCount; i++) {
             if (i == popUpIndex) {
                 popup_holder.GetChild(i).gameObject.SetActive(true);
@@ -90,6 +95,12 @@ public class TutorialManager : MonoBehaviour {
             //Popup 5 will be the victory screen
             playerMovement.isInMenu = true;
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            QuestionUIPopup.Instance.ShowQuestion("Are you sure you want to quit the game?", () => { SceneManager.LoadScene("Main_Menu"); }, () => { playerCam.isLocked = false; });
+            playerCam.isLocked = true;
+         
+        }
     }
 
     private bool setShaders;
@@ -100,6 +111,8 @@ public class TutorialManager : MonoBehaviour {
         if (station1.currentZinc.currentCottons.Count >= 2) {
             popUpIndex++;
         }
+
+        
     }
 
     private void AddShaderToObject(List<GameObject> objects) {
