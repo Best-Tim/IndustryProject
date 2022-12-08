@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -20,8 +21,11 @@ public class Station2 : StationInterface
     }
     public override void lockCamera(PlayerMovement player)
     {
-        base.lockCamera(player);
-        hand.StartClock();
+        if (!isComplete)
+        {
+            base.lockCamera(player);
+            hand.StartClock();
+        }
     }
     private void Update()
     {
@@ -41,7 +45,13 @@ public class Station2 : StationInterface
             if (checkWinCon())
             {
                 Debug.Log("you win");
-                green.CompleteStation();
+                base.completeStation();
+                hand.StopLoop();
+                green.MakeGreen();
+            }
+            else
+            {
+                //explosion
             }
         }
     }

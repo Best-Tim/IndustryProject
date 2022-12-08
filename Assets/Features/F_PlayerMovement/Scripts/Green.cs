@@ -5,7 +5,7 @@ using UnityEngine;
 public class Green : MonoBehaviour
 {
     public List<Transform> transformList = new List<Transform>();
-    public void CompleteStation()
+    public void MakeGreen()
     {
         foreach(Transform t in transformList)
         {

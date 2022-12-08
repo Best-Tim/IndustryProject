@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class StationInterface : MonoBehaviour
 {
     public GameObject playerPosition;
-    private bool isComplete = false;
+    public bool isComplete = false;
 
     public virtual void reset() { }
 
