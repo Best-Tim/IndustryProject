@@ -14,9 +14,7 @@ public class PlayerCam : MonoBehaviour
     public bool isLocked;
     
     void Awake()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+    {       
         isLocked = false;
     }
 
@@ -30,6 +28,13 @@ public class PlayerCam : MonoBehaviour
             rotationX = Mathf.Clamp(rotationX, -90f, 90f);
             transform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
             playerBody.Rotate(Vector3.up * mouseX);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        if (isLocked)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 }

@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Main/Main_Menu.unity
     guid: f409cc1452de50d43bdba9cab88a922a
   - enabled: 1
+    path: Assets/Features/F_Tutorial/Scenes/feature-tutorial.unity
+    guid: 2475b32850c1edc44a263ae096a105c3
+  - enabled: 1
     path: Assets/Scenes/Other/feature-playerMovement.unity
     guid: 49821e405f3f18e46bcffcbb9873bf76
   m_configObjects: {}
