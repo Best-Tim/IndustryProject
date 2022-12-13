@@ -296,12 +296,13 @@ MonoBehaviour:
   camTransform: {fileID: 7934430208378381640}
   playerCam: {fileID: 4208644720823996936}
   playerMovement: {fileID: 2098671024162970801}
-  pickUpDistance: 2
+  pickUpDistance: 4
   pickUpForce: 150
   pickUpMask:
     serializedVersion: 2
     m_Bits: 119
   rotationSensitivity: 300
+  rotateObject: {fileID: 0}
   heldObjTransform: {fileID: 2635578419541230606}
 --- !u!1 &7934430208102344184
 GameObject:
@@ -449,7 +450,7 @@ Camera:
   field of view: 60
   orthographic: 0
   orthographic size: 5
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 119
@@ -484,6 +485,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ee27af68c498c44893c4f89abf89bc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: 300
+  sensitivity: 200
   playerBody: {fileID: 7934430206801587809}
   isLocked: 0
