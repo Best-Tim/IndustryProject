@@ -178,7 +178,7 @@ public class PlayerPickUpController : MonoBehaviour
     //Locks the held object on the camera transform position
     void MoveObject()
     {
-        if (Vector3.Distance(heldObject.transform.position, heldObjTransform.position) > 0.1f)
+        if (Vector3.Distance(heldObject.transform.position, heldObjTransform.position) > 0.2f)
         {
             Vector3 moveDirection = (heldObjTransform.position - heldObject.transform.position);
             heldRB.AddForce(moveDirection * pickUpForce);
