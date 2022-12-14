@@ -51,9 +51,20 @@ public class SingletonUI : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    //call UI with default timer (5 seconds)
     public void SetNewGeraldUI(string message)
     {
+        if (notificationCoroutine != null)
+        {
+            StopCoroutine(notificationCoroutine);
+        }
+        notificationCoroutine = FadeOutNotification(message);
+        StartCoroutine(notificationCoroutine);
+    }
+    //call UI with custom timer - untested
+    public void SetNewGeraldUI(string message, float n)
+    {
+        fadeTime = n;
         if(notificationCoroutine != null)
         {
             StopCoroutine(notificationCoroutine);

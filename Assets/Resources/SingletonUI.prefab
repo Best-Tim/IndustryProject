@@ -410,7 +410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   notificationText: {fileID: 9076880779625157062}
-  fadeTime: 2
+  fadeTime: 5
   images:
   - {fileID: 361737633131442907}
   - {fileID: 440153296908093882}
