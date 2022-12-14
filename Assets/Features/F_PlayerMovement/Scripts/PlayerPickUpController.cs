@@ -56,7 +56,7 @@ public class PlayerPickUpController : MonoBehaviour
 
                     if (raycastHit.transform.gameObject.TryGetComponent(out StationInterface sI))
                     {
-                        sI.lockCamera(playerMovement);
+                        sI.LockCamera(playerMovement);
                         isAbleToPickup = true;
                         currentStation = sI;
                     }
@@ -104,6 +104,7 @@ public class PlayerPickUpController : MonoBehaviour
         {
             playerMovement.isLocked = false;
             isAbleToPickup = false;
+            currentStation.Reset();
         }
 
         //If you want to rotate an object and not move it
