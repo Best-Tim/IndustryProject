@@ -8,17 +8,20 @@ public abstract class StationInterface : MonoBehaviour
     public GameObject playerPosition;
     public bool isComplete = false;
 
-    public virtual void reset() { }
+    private PlayerMovement lockedPlayer;
+
+    public virtual void Reset() { }
     public virtual void WinCondition() { }
 
-    public void completeStation()
+    public void CompleteStation()
     {
         isComplete = true;
     }
 
-    public virtual void lockCamera(PlayerMovement player)
+    public virtual void LockCamera(PlayerMovement player)
     {
         player.gameObject.transform.position = playerPosition.transform.position;
         player.isLocked = true;
+        lockedPlayer = player;
     }
 }

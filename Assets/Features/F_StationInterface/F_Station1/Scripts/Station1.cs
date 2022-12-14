@@ -31,7 +31,7 @@ public class Station1 : StationInterface
             button.isPressed = false;
         }
     }
-    public override void reset()
+    public override void Reset()
     {
         for (int i = 0; i < currentMaterials.Count; i++)
         {
@@ -84,19 +84,19 @@ public class Station1 : StationInterface
         {
             if (rightAnswer == 3 && currentZinc.currentColor == Color.red)
             {
-                completeStation();
+                CompleteStation();
                 Debug.Log("I won R");
 
             }
             if (rightAnswer == 4 && currentZinc.currentColor == Color.blue)
             {
-                completeStation();
+                CompleteStation();
                 Debug.Log("I won B");
 
             }
             if (rightAnswer == 5 && currentZinc.currentColor == Color.green)
             {
-                completeStation();
+                CompleteStation();
                 Debug.Log("I won G");
             }
         }

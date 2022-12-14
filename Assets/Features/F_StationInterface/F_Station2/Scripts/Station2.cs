@@ -12,119 +12,89 @@ public class Station2 : StationInterface
     private Green green;
 
     [SerializeField]
-    private Station1 station1;
+    private Station1 _station1;
 
     private void Start()
     {
-        hand = GetComponentInChildren<ClockHand>(); 
-        
+        hand = GetComponentInChildren<ClockHand>();
+        if (_station1 == null)
+        {
+            _station1 = FindObjectOfType<Station1>();
+        }
     }
-    public override void lockCamera(PlayerMovement player)
+    public override void LockCamera(PlayerMovement player)
     {
         if (!isComplete)
         {
-            base.lockCamera(player);
+            base.LockCamera(player);
             hand.StartClock();
         }
     }
     private void Update()
     {
+        WinCondition();
+    }
+    public override void Reset()
+    {
+        hand.Reset();
+        hand.StopClock();
+    }
+    public override void WinCondition()
+    {
+
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            hand.StopLoop();
+            hand.ButtonPressed();
         }
         if (Input.GetKeyUp(KeyCode.Y))
         {
-            hand.StartLoop();
+            hand.ButtonUNpressed();
             if (checkWinCon())
             {
                 Debug.Log("you win");
-                base.completeStation();
-                hand.StopLoop();
+                base.CompleteStation();
+                hand.ButtonPressed();
                 green.MakeGreen();
             }
             else
             {
                 green.MakeRed();
-                //explosion
             }
         }
-    }
-    public override void reset()
-    {
-        hand.Reset();
-    }
-    public override void WinCondition()
-    {
     }
     private bool checkWinCon()
     {
 
-        //int scale = station1.currentZinc.scale;
+        int scale = _station1.currentZinc.scale;
 
-        //remove hard coded int for station 1 reference when merged
-        int scale = 3;
         if (scale == 3)
         {
             //north
             if (hand.random == 0)
             {
-                if (checkHandPosition(1, 3))
-                {
-                    return false;
-                }
-                if (checkHandPosition(4, 6))
-                {
-                    return false;
-                }
-                if (checkHandPosition(7, 9))
-                {
-                    return false;
-                }
                 if (checkHandPosition(10, 12))
                 {
                     return true;
                 }
+                else return false;
             }
             //east
             if (hand.random == 90)
             {
-                if (checkHandPosition(1, 3))
-                {
-                    return false;
-                }
-                if (checkHandPosition(4, 6))
-                {
-                    return false;
-                }
                 if (checkHandPosition(7, 9))
                 {
                     return true;
                 }
-                if (checkHandPosition(10, 12))
-                {
-                    return false;
-                }
+                else return false;
             }
             //south
             if (hand.random == 180)
             {
-                if (checkHandPosition(1, 3))
-                {
-                    return false;
-                }
                 if (checkHandPosition(4, 6))
                 {
                     return true;
                 }
-                if (checkHandPosition(7, 9))
-                {
-                    return false;
-                }
-                if (checkHandPosition(10, 12))
-                {
-                    return false;
-                }
+                else return false;
             }
             //west
             if (hand.random == 270)
@@ -133,18 +103,7 @@ public class Station2 : StationInterface
                 {
                     return true;
                 }
-                if (checkHandPosition(4, 6))
-                {
-                    return false;
-                }
-                if (checkHandPosition(7, 9))
-                {
-                    return false;
-                }
-                if (checkHandPosition(10, 12))
-                {
-                    return false;
-                }
+                else return false;
             }
         }
         if (scale == 2)
@@ -156,78 +115,34 @@ public class Station2 : StationInterface
                 {
                     return true;
                 }
-                if (checkHandPosition(4, 6))
-                {
-                    return false;
-                }
-                if (checkHandPosition(7, 9))
-                {
-                    return false;
-                }
-                if (checkHandPosition(10, 12))
-                {
-                    return false;
-                }
+                else return false;
             }
             //east
             if (hand.random == 90)
             {
-                if (checkHandPosition(1, 3))
-                {
-                    return false;
-                }
                 if (checkHandPosition(4, 6))
                 {
                     return true;
                 }
-                if (checkHandPosition(7, 9))
-                {
-                    return false;
-                }
-                if (checkHandPosition(10, 12))
-                {
-                    return false;
-                }
+                else return false;
             }
             //south
             if (hand.random == 180)
             {
-                if (checkHandPosition(1, 3))
-                {
-                    return false;
-                }
-                if (checkHandPosition(4, 6))
-                {
-                    return false;
-                }
                 if (checkHandPosition(7, 9))
                 {
                     return true;
                 }
-                if (checkHandPosition(10, 12))
-                {
-                    return false;
-                }
+                else return false;
             }
             //west
             if (hand.random == 270)
             {
-                if (checkHandPosition(1, 3))
-                {
-                    return false;
-                }
-                if (checkHandPosition(4, 6))
-                {
-                    return false;
-                }
-                if (checkHandPosition(7, 9))
-                {
-                    return false;
-                }
                 if (checkHandPosition(10, 12))
                 {
                     return true;
                 }
+                else return false;
             }
         }
         if (scale == 1)
@@ -235,62 +150,29 @@ public class Station2 : StationInterface
             //north
             if (hand.random == 0)
             {
-                if (checkHandPosition(1, 3))
-                {
-                    return false;
-                }
-                if (checkHandPosition(4, 6))
-                {
-                    return false;
-                }
                 if (checkHandPosition(7, 9))
                 {
                     return true;
                 }
-                if (checkHandPosition(10, 12))
-                {
-                    return false;
-                }
+                else return false;
             }
             //east
             if (hand.random == 90)
             {
-                if (checkHandPosition(1, 3))
-                {
-                    return false;
-                }
-                if (checkHandPosition(4, 6))
-                {
-                    return false;
-                }
-                if (checkHandPosition(7, 9))
-                {
-                    return false;
-                }
                 if (checkHandPosition(10, 12))
                 {
                     return true;
                 }
+                else return false;
             }
             //south
             if (hand.random == 180)
             {
-                if (checkHandPosition(1, 3))
-                {
-                    return false;
-                }
                 if (checkHandPosition(4, 6))
                 {
                     return true;
                 }
-                if (checkHandPosition(7, 9))
-                {
-                    return false;
-                }
-                if (checkHandPosition(10, 12))
-                {
-                    return false;
-                }
+                else return false;
             }
             //west
             if (hand.random == 270)
@@ -299,18 +181,7 @@ public class Station2 : StationInterface
                 {
                     return true;
                 }
-                if (checkHandPosition(4, 6))
-                {
-                    return false;
-                }
-                if (checkHandPosition(7, 9))
-                {
-                    return false;
-                }
-                if (checkHandPosition(10, 12))
-                {
-                    return false;
-                }
+                else return false;
             }
         }
         return false;

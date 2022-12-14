@@ -7,13 +7,13 @@ public class ClockHand : MonoBehaviour
 {
     public int hourClock;
     public int random;
-    public bool startClock = false;
 
     [SerializeField]
     private int rotationSpeed = 200;
     private int[] startingPos = { 0, 90, 180, 270 };
-
+    private bool startClock = false;
     private bool buttonPressed = false;
+
     void clockHandInit()
     {
         random = UnityEngine.Random.Range(0, 3);
@@ -28,6 +28,10 @@ public class ClockHand : MonoBehaviour
     public void StartClock()
     {
         startClock = true;
+    }
+    public void StopClock()
+    {
+        startClock = false;
     }
     private void Update()
     {
@@ -44,18 +48,17 @@ public class ClockHand : MonoBehaviour
             }
         }
     }
-    public void StopLoop()
+    public void ButtonPressed()
     {
         buttonPressed = true;
     }
-    public void StartLoop()
+    public void ButtonUNpressed()
     {
         buttonPressed = false;
     }
     private void Rotate(float zValue)
     {
         this.gameObject.transform.Rotate(new Vector3(0, 0, zValue) * Time.deltaTime);
-
     }
     public void Reset()
     {
