@@ -9,9 +9,13 @@ public class SingletonUI : MonoBehaviour
     private IEnumerator notificationCoroutine;
     private static SingletonUI instance;
 
+    //text limit size: 80 chars
     [SerializeField] private TextMeshProUGUI notificationText;
     //make private public for testing
-    [SerializeField] public float fadeTime;
+    [SerializeField] private float fadeTime;
+    [SerializeField] private List<Image> images;
+    [SerializeField] private RawImage gerald;
+
     public static SingletonUI Instance
     {
         get
@@ -48,7 +52,7 @@ public class SingletonUI : MonoBehaviour
         }
     }
 
-    public void SetNewNotification(string message)
+    public void SetNewGeraldUI(string message)
     {
         if(notificationCoroutine != null)
         {
@@ -65,12 +69,24 @@ public class SingletonUI : MonoBehaviour
         while (t<fadeTime)
         {
             t += Time.unscaledDeltaTime;
-            notificationText.color = new Color(
-                notificationText.color.r,
-                notificationText.color.g,
-                notificationText.color.b,
-                Mathf.Lerp(1f,0f, t/fadeTime));
+            notificationText.color = fadeOut(notificationText.color, t);
+
+            foreach (var i in images)
+            {
+                i.color = fadeOut(i.color, t);
+            }
+            gerald.color = fadeOut(gerald.color, t);
+
             yield return null;
         }
+    }
+
+    private Color fadeOut(Color c, float t)
+    {
+        return new Color(
+                c.r,
+                c.g,
+                c.b,
+                Mathf.Lerp(1f, 0f, t / fadeTime));
     }
 }
