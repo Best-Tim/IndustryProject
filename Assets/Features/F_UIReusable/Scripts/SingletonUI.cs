@@ -8,6 +8,7 @@ public class SingletonUI : MonoBehaviour
 {
     private IEnumerator notificationCoroutine;
     private static SingletonUI instance;
+    private Queue<IEnumerator> queue = new Queue<IEnumerator>();
 
     //text limit size: 80 chars
     [SerializeField] private TextMeshProUGUI notificationText;
@@ -54,15 +55,14 @@ public class SingletonUI : MonoBehaviour
     {
         checkCoroutine(notificationCoroutine);
         notificationCoroutine = FadeOutNotification(message);
-        StartCoroutine(notificationCoroutine);
+        queue.Enqueue(notificationCoroutine);
     }
     //call UI with custom timer
     public void SetNewGeraldUI(string message, float n)
     {
-        fadeTime = n;
         checkCoroutine(notificationCoroutine);
         notificationCoroutine = FadeOutNotification(message, n);
-        StartCoroutine(notificationCoroutine);
+        queue.Enqueue(notificationCoroutine);
     }
     //duplicate code
     private void checkCoroutine(IEnumerator coroutine)
@@ -99,13 +99,13 @@ public class SingletonUI : MonoBehaviour
         while (t < n)
         {
             t += Time.unscaledDeltaTime;
-            notificationText.color = fadeOut(notificationText.color, t);
+            notificationText.color = fadeOut(notificationText.color, t, n);
 
             foreach (var i in images)
             {
-                i.color = fadeOut(i.color, t);
+                i.color = fadeOut(i.color, t, n);
             }
-            gerald.color = fadeOut(gerald.color, t);
+            gerald.color = fadeOut(gerald.color, t, n);
 
             yield return null;
         }
@@ -117,5 +117,28 @@ public class SingletonUI : MonoBehaviour
                 c.g,
                 c.b,
                 Mathf.Lerp(1f, 0f, t / fadeTime));
+    }
+    private Color fadeOut(Color c, float t, float n)
+    {
+        return new Color(
+                c.r,
+                c.g,
+                c.b,
+                Mathf.Lerp(1f, 0f, t / n));
+    }
+    private void Start()
+    {
+        StartCoroutine(CoroutineCoordinator());
+    }
+    IEnumerator CoroutineCoordinator()
+    {
+        while (true)
+        {
+            while (queue.Count >0)
+            {
+                yield return StartCoroutine(queue.Dequeue());
+            }
+            yield return null;
+        }
     }
 }
