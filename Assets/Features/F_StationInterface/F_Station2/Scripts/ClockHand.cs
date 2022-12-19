@@ -5,63 +5,55 @@ using UnityEngine;
 
 public class ClockHand : MonoBehaviour
 {
-    public int hourClock;
-    public int random;
-    public bool startClock = false;
+    public int temp;
 
     [SerializeField]
-    private int rotationSpeed = 200;
-    private int[] startingPos = { 0, 90, 180, 270 };
+    private int rotationSpeed = 135;
 
     private bool buttonPressed = false;
     void clockHandInit()
     {
-        random = UnityEngine.Random.Range(0, 3);
-        //Rotate(startingPos[random]); 
-        gameObject.transform.eulerAngles = new Vector3(0, 0, startingPos[random]);
-        random = startingPos[random];
+        gameObject.transform.eulerAngles = new Vector3(0, 0, 225);
+        temp= 0;
     }
     private void Start()
     {
         clockHandInit();
     }
-    public void StartClock()
-    {
-        startClock = true;
-    }
     private void Update()
     {
-        if (!buttonPressed && startClock)
+        if (gameObject.transform.eulerAngles.z >= 135 && gameObject.transform.eulerAngles.z < 225)
+        {
+            ButtonNotPressed();
+        }
+        if (buttonPressed)
         {
             Rotate(rotationSpeed);
-
-            if (Mathf.Round(gameObject.transform.eulerAngles.z) % 30 == 0)
+        }
+        if (Mathf.Round(gameObject.transform.eulerAngles.z) % 15 == 0)
+        {
+            temp = Convert.ToInt32(Mathf.Round(gameObject.transform.eulerAngles.z) / 15);
+            if (temp == 0)
             {
-                hourClock = Convert.ToInt32(Mathf.Round(gameObject.transform.eulerAngles.z) / 30);
-                //11 = 11
-                //12 = 0
-                //1 = 1
+                temp = 24;
             }
         }
     }
-    public void StopLoop()
-    {
-        buttonPressed = true;
-    }
-    public void StartLoop()
+    public void ButtonNotPressed()
     {
         buttonPressed = false;
+    }
+    public void ButtonPressed()
+    {
+           buttonPressed = true;
     }
     private void Rotate(float zValue)
     {
         this.gameObject.transform.Rotate(new Vector3(0, 0, zValue) * Time.deltaTime);
-
     }
     public void Reset()
     {
-        gameObject.transform.eulerAngles = new Vector3(0,0,0);
-        hourClock = 0;
-        startClock = false;
         clockHandInit();
+        ButtonNotPressed();
     }
 }

@@ -104,6 +104,7 @@ public class PlayerPickUpController : MonoBehaviour
         {
             playerMovement.isLocked = false;
             isAbleToPickup = false;
+            currentStation.reset();
         }
 
         //If you want to rotate an object and not move it

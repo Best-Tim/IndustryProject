@@ -8,15 +8,13 @@ public class Station2 : StationInterface
 {
     private ClockHand hand;
 
+    //temperature so it's readable
     [SerializeField]
-    private Green green;
-
-    [SerializeField]
-    private Station1 station1;
+    private int temperatureNormalized;
 
     private void Start()
     {
-        hand = GetComponentInChildren<ClockHand>(); 
+        hand = transform.parent.GetComponentInChildren<ClockHand>(); 
         
     }
     public override void lockCamera(PlayerMovement player)
@@ -24,31 +22,19 @@ public class Station2 : StationInterface
         if (!isComplete)
         {
             base.lockCamera(player);
-            hand.StartClock();
         }
     }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            hand.StopLoop();
+            hand.ButtonPressed();
         }
         if (Input.GetKeyUp(KeyCode.Y))
         {
-            hand.StartLoop();
-            if (checkWinCon())
-            {
-                Debug.Log("you win");
-                base.completeStation();
-                hand.StopLoop();
-                green.MakeGreen();
-            }
-            else
-            {
-                green.MakeRed();
-                //explosion
-            }
+            hand.ButtonNotPressed();
         }
+        TranslateToDegrees();
     }
     public override void reset()
     {
@@ -57,268 +43,66 @@ public class Station2 : StationInterface
     public override void WinCondition()
     {
     }
-    private bool checkWinCon()
-    {
-
-        //int scale = station1.currentZinc.scale;
-
-        //remove hard coded int for station 1 reference when merged
-        int scale = 3;
-        if (scale == 3)
+    private void TranslateToDegrees()
+    {   
+        //-135 = 15
+        if (checkTempHandBetween(15,16))
         {
-            //north
-            if (hand.random == 0)
-            {
-                if (checkHandPosition(1, 3))
-                {
-                    return false;
-                }
-                if (checkHandPosition(4, 6))
-                {
-                    return false;
-                }
-                if (checkHandPosition(7, 9))
-                {
-                    return false;
-                }
-                if (checkHandPosition(10, 12))
-                {
-                    return true;
-                }
-            }
-            //east
-            if (hand.random == 90)
-            {
-                if (checkHandPosition(1, 3))
-                {
-                    return false;
-                }
-                if (checkHandPosition(4, 6))
-                {
-                    return false;
-                }
-                if (checkHandPosition(7, 9))
-                {
-                    return true;
-                }
-                if (checkHandPosition(10, 12))
-                {
-                    return false;
-                }
-            }
-            //south
-            if (hand.random == 180)
-            {
-                if (checkHandPosition(1, 3))
-                {
-                    return false;
-                }
-                if (checkHandPosition(4, 6))
-                {
-                    return true;
-                }
-                if (checkHandPosition(7, 9))
-                {
-                    return false;
-                }
-                if (checkHandPosition(10, 12))
-                {
-                    return false;
-                }
-            }
-            //west
-            if (hand.random == 270)
-            {
-                if (checkHandPosition(1, 3))
-                {
-                    return true;
-                }
-                if (checkHandPosition(4, 6))
-                {
-                    return false;
-                }
-                if (checkHandPosition(7, 9))
-                {
-                    return false;
-                }
-                if (checkHandPosition(10, 12))
-                {
-                    return false;
-                }
-            }
+            SetNormalizedTemp(0);
         }
-        if (scale == 2)
+        //-105 = 17
+        if (checkTempHandBetween(17,18))
         {
-            //north
-            if (hand.random == 0)
-            {
-                if (checkHandPosition(1, 3))
-                {
-                    return true;
-                }
-                if (checkHandPosition(4, 6))
-                {
-                    return false;
-                }
-                if (checkHandPosition(7, 9))
-                {
-                    return false;
-                }
-                if (checkHandPosition(10, 12))
-                {
-                    return false;
-                }
-            }
-            //east
-            if (hand.random == 90)
-            {
-                if (checkHandPosition(1, 3))
-                {
-                    return false;
-                }
-                if (checkHandPosition(4, 6))
-                {
-                    return true;
-                }
-                if (checkHandPosition(7, 9))
-                {
-                    return false;
-                }
-                if (checkHandPosition(10, 12))
-                {
-                    return false;
-                }
-            }
-            //south
-            if (hand.random == 180)
-            {
-                if (checkHandPosition(1, 3))
-                {
-                    return false;
-                }
-                if (checkHandPosition(4, 6))
-                {
-                    return false;
-                }
-                if (checkHandPosition(7, 9))
-                {
-                    return true;
-                }
-                if (checkHandPosition(10, 12))
-                {
-                    return false;
-                }
-            }
-            //west
-            if (hand.random == 270)
-            {
-                if (checkHandPosition(1, 3))
-                {
-                    return false;
-                }
-                if (checkHandPosition(4, 6))
-                {
-                    return false;
-                }
-                if (checkHandPosition(7, 9))
-                {
-                    return false;
-                }
-                if (checkHandPosition(10, 12))
-                {
-                    return true;
-                }
-            }
+            SetNormalizedTemp(15);
         }
-        if (scale == 1)
+        //-75 = 19
+        if (checkTempHandBetween(19, 20))
         {
-            //north
-            if (hand.random == 0)
-            {
-                if (checkHandPosition(1, 3))
-                {
-                    return false;
-                }
-                if (checkHandPosition(4, 6))
-                {
-                    return false;
-                }
-                if (checkHandPosition(7, 9))
-                {
-                    return true;
-                }
-                if (checkHandPosition(10, 12))
-                {
-                    return false;
-                }
-            }
-            //east
-            if (hand.random == 90)
-            {
-                if (checkHandPosition(1, 3))
-                {
-                    return false;
-                }
-                if (checkHandPosition(4, 6))
-                {
-                    return false;
-                }
-                if (checkHandPosition(7, 9))
-                {
-                    return false;
-                }
-                if (checkHandPosition(10, 12))
-                {
-                    return true;
-                }
-            }
-            //south
-            if (hand.random == 180)
-            {
-                if (checkHandPosition(1, 3))
-                {
-                    return false;
-                }
-                if (checkHandPosition(4, 6))
-                {
-                    return true;
-                }
-                if (checkHandPosition(7, 9))
-                {
-                    return false;
-                }
-                if (checkHandPosition(10, 12))
-                {
-                    return false;
-                }
-            }
-            //west
-            if (hand.random == 270)
-            {
-                if (checkHandPosition(1, 3))
-                {
-                    return true;
-                }
-                if (checkHandPosition(4, 6))
-                {
-                    return false;
-                }
-                if (checkHandPosition(7, 9))
-                {
-                    return false;
-                }
-                if (checkHandPosition(10, 12))
-                {
-                    return false;
-                }
-            }
+            SetNormalizedTemp(30);
         }
-        return false;
+        //-45 = 21
+        if (checkTempHandBetween(21, 22))
+        {
+            SetNormalizedTemp(45);
+        }
+        //-15 = 23
+        if (checkTempHandBetween(23, 24))
+        {
+            SetNormalizedTemp(60);
+        }
+        // 15 = 1
+        if (checkTempHandBetween(1, 2))
+        {
+            SetNormalizedTemp(75);
+        }
+        // 45 = 3
+        if (checkTempHandBetween(3, 4))
+        {
+            SetNormalizedTemp(90);
+        }
+        // 75 = 5
+        if (checkTempHandBetween(5, 6))
+        {
+            SetNormalizedTemp(105);
+        }
+        //105 = 7
+        if (checkTempHandBetween(7, 8))
+        {
+            SetNormalizedTemp(120);
+        }
+        //135 = 9
+        if (checkTempHandBetween(9, 10))
+        {
+            SetNormalizedTemp(135);
+        }
     }
-
-    public bool checkHandPosition(int firstInclusive, int lastInclusive)
+    private void SetNormalizedTemp(int n)
     {
-        if (hand.hourClock >= firstInclusive && hand.hourClock <= lastInclusive)
+        temperatureNormalized = n;
+    }
+    public bool checkTempHandBetween(int firstInclusive, int lastInclusive)
+    {
+        if (hand.temp >= firstInclusive && hand.temp <= lastInclusive)
         {
             return true;
         }
