@@ -24,7 +24,11 @@ public class Station1 : StationInterface
 
     private bool isFinished;
 
-    private void Start()
+    public GameObject stirringHandlePrefab;
+    public GameObject stirringHandleSpawnPos;
+    private GameObject stirringHandle;
+
+    private void Awake()
     {
         isFinished = false;
         SpawnObjects();
@@ -49,6 +53,7 @@ public class Station1 : StationInterface
         }
         currentZinc.Explode();
         Destroy(currentZinc.gameObject);
+        Destroy(stirringHandle);
         SpawnObjects();
     }
     void SpawnObjects()
@@ -65,6 +70,8 @@ public class Station1 : StationInterface
         }
         GameObject zinc = Instantiate(zincBowls[Random.Range(0,zincBowls.Count)], zincLocation.position, Quaternion.identity, gameObject.transform.parent);
         currentZinc = zinc.GetComponent<ZincScale>();
+        stirringHandle = Instantiate(stirringHandlePrefab, stirringHandleSpawnPos.transform.position,
+            stirringHandleSpawnPos.transform.rotation);
         FindRightAnswer();
     }
     void FindRightAnswer()
@@ -93,21 +100,18 @@ public class Station1 : StationInterface
             if (rightAnswer == 3 && currentZinc.currentColor == "RED")
             {
                 completeStation();
-                Debug.Log("I won R");
                 isFinished = true;
 
             }
             if (rightAnswer == 4 && currentZinc.currentColor == "BLUE")
             {
                 completeStation();
-                Debug.Log("I won B");
                 isFinished = true;
 
             }
             if (rightAnswer == 5 && currentZinc.currentColor == "GREEN")
             {
                 completeStation();
-                Debug.Log("I won G");
                 isFinished = true;
             }
         }

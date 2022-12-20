@@ -1,15 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RotatableMediator : MonoBehaviour
 {
-    private GameObject zincCl;
+    public GameObject zincCl;
     public bool isStiring;
 
     private void Awake()
     {
         isStiring = false;
+    }
+
+    private void Start()
+    {
+        zincCl = FindObjectOfType<ZincScale>().gameObject;
     }
 
     private void Update()
@@ -33,5 +39,10 @@ public class RotatableMediator : MonoBehaviour
         {
             zincCl = other.gameObject;
         }
+    }
+
+    public void LockToBowl()
+    {
+        zincCl.GetComponent<ZincScale>().LockHandleToBowl(gameObject);
     }
 }

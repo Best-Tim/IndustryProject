@@ -106,19 +106,31 @@ public class ZincScale : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("PickUp"))
         {
-            other.gameObject.tag = "Rotatable";
-            pickUpController.DropObject();
-            pickUpController.rotateObject = other.gameObject;
-            other.gameObject.transform.position = handlePos.position;
-            other.gameObject.transform.rotation = handlePos.rotation;
-            Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
-            rb.constraints = RigidbodyConstraints.FreezeAll;
-            rb.useGravity = false;
+            // other.gameObject.tag = "Rotatable";
+            // pickUpController.DropObject();
+            // pickUpController.rotateObject = other.gameObject;
+            // other.gameObject.transform.position = handlePos.position;
+            // other.gameObject.transform.rotation = handlePos.rotation;
+            // Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
+            // rb.constraints = RigidbodyConstraints.FreezeAll;
+            // rb.useGravity = false;
         }
     }
 
     public void Explode()
     {
         Instantiate(explosionVX, gameObject.transform.position + new Vector3(0, .5f, 0), Quaternion.identity);
+    }
+
+    public void LockHandleToBowl(GameObject handle)
+    {
+        handle.tag = "Rotatable";
+        pickUpController.DropObject();
+        pickUpController.rotateObject = handle;
+        handle.transform.position = handlePos.position;
+        handle.transform.rotation = handlePos.rotation;
+        Rigidbody rb = handle.GetComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+        rb.useGravity = false;
     }
 }
