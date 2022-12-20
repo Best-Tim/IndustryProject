@@ -308,6 +308,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Station 2 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2506002362779114366, guid: caaa9b10e28d0bb4a81f3c437e1a666c, type: 3}
+      propertyPath: clearBehavior
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3492766479404885609, guid: caaa9b10e28d0bb4a81f3c437e1a666c, type: 3}
+      propertyPath: m_Intensity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3820866793747545618, guid: caaa9b10e28d0bb4a81f3c437e1a666c, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.43045938
@@ -370,6 +378,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5237343549379303639, guid: caaa9b10e28d0bb4a81f3c437e1a666c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7325550508469392677, guid: caaa9b10e28d0bb4a81f3c437e1a666c, type: 3}
+      propertyPath: clearBehavior
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8718059634526698275, guid: caaa9b10e28d0bb4a81f3c437e1a666c, type: 3}
+      propertyPath: clearBehavior
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

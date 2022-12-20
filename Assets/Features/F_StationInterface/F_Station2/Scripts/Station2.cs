@@ -26,6 +26,7 @@ public class Station2 : StationInterface
     }
     private void Update()
     {
+        //for testing
         if (Input.GetKeyDown(KeyCode.Y))
         {
             hand.ButtonPressed();

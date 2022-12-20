@@ -8,7 +8,7 @@ public class ClockHand : MonoBehaviour
     public int temp;
 
     [SerializeField]
-    private int rotationSpeed = 135;
+    private int rotationSpeed = 360;
 
     private bool buttonPressed = false;
     void clockHandInit()
@@ -30,6 +30,7 @@ public class ClockHand : MonoBehaviour
         {
             Rotate(rotationSpeed);
         }
+ 
         if (Mathf.Round(gameObject.transform.eulerAngles.z) % 15 == 0)
         {
             temp = Convert.ToInt32(Mathf.Round(gameObject.transform.eulerAngles.z) / 15);
@@ -38,6 +39,7 @@ public class ClockHand : MonoBehaviour
                 temp = 24;
             }
         }
+        
     }
     public void ButtonNotPressed()
     {
