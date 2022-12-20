@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ParticleController : MonoBehaviour
@@ -7,7 +8,7 @@ public class ParticleController : MonoBehaviour
     [SerializeField]
     ParticleSystem fire;
     [SerializeField]
-    ParticleSystem chiefKeef;
+    ParticleSystem smoke;
     [SerializeField]
     ParticleSystem sparks;
 
@@ -29,7 +30,7 @@ public class ParticleController : MonoBehaviour
                 }
                 if (child.gameObject.name == "ChiefKeef")
                 {
-                    chiefKeef = child.GetComponent<ParticleSystem>();
+                    smoke = child.GetComponent<ParticleSystem>();
                 }
                 if (child.gameObject.name == "Sparks")
                 {
@@ -38,16 +39,28 @@ public class ParticleController : MonoBehaviour
             }
         }
     }
-    private void Update()
+    private ParticleSystem FindCorrectParticle(string s)
     {
-        if (Input.GetKeyDown(KeyCode.L))
+        if (s == "Fire")
         {
-            fire.Play();
+            return fire;
         }
-        if (Input.GetKeyUp(KeyCode.L))
+        if (s == "Smoke")
         {
-            fire.Stop();
+            return smoke;
         }
+        if (s == "Sparks")
+        {
+            return sparks;
+        }
+        return null;
     }
-
+    public void PlayParticleByName(string s)
+    {
+        FindCorrectParticle(s).Play();
+    }
+    public void StopParticleByName(string s)
+    {
+        FindCorrectParticle(s).Stop();
+    }
 }

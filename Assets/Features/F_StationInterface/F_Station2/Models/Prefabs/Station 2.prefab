@@ -9939,7 +9939,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fire: {fileID: 0}
-  chiefKeef: {fileID: 0}
+  smoke: {fileID: 0}
   sparks: {fileID: 0}
 --- !u!1 &5418418982726740284
 GameObject:
@@ -14796,7 +14796,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6667036365217439405}
-  m_LocalRotation: {x: 0.27059793, y: 0.65328157, z: 0.65328157, w: -0.27059793}
+  m_LocalRotation: {x: -0.27855903, y: -0.64992684, z: -0.64992684, w: 0.27855903}
   m_LocalPosition: {x: 0, y: 1.5, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14804,7 +14804,7 @@ Transform:
   - {fileID: 5417885253706575562}
   m_Father: {fileID: 7623312984946602339}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 225}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -133.6}
 --- !u!114 &797247830560412564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14817,7 +14817,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27d7d9a4ee05a7042a2d3054858a8978, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  temp: 0
   rotationSpeed: 200
 --- !u!1 &8349597453107318442
 GameObject:

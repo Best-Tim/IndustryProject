@@ -7,7 +7,7 @@ using UnityEngine;
 public class Station2 : StationInterface
 {
     private ClockHand hand;
-
+    private ParticleController particleController;
     //temperature so it's readable
     [SerializeField]
     private int temperatureNormalized;
@@ -15,7 +15,7 @@ public class Station2 : StationInterface
     private void Start()
     {
         hand = transform.parent.GetComponentInChildren<ClockHand>(); 
-        
+        particleController = transform.parent.GetComponentInChildren<ParticleController>();
     }
     public override void lockCamera(PlayerMovement player)
     {
@@ -30,10 +30,12 @@ public class Station2 : StationInterface
         if (Input.GetKeyDown(KeyCode.Y))
         {
             hand.ButtonPressed();
+            particleController.PlayParticleByName("Fire");
         }
         if (Input.GetKeyUp(KeyCode.Y))
         {
             hand.ButtonNotPressed();
+            particleController.StopParticleByName("Fire");
         }
         TranslateToDegrees();
     }
@@ -103,7 +105,7 @@ public class Station2 : StationInterface
     }
     public bool checkTempHandBetween(int firstInclusive, int lastInclusive)
     {
-        if (hand.temp >= firstInclusive && hand.temp <= lastInclusive)
+        if (hand.Temp >= firstInclusive && hand.Temp <= lastInclusive)
         {
             return true;
         }
