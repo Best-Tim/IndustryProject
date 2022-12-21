@@ -10,6 +10,7 @@ public class GameMenu_EventHandler : MonoBehaviour {
     [SerializeField] private bool IsMenuActive = false;
     [SerializeField] private PlayerMovement _playerMovement;
     [SerializeField] private PlayerCam _playerCam;
+    [SerializeField] private GameObject confirmMenu;
     public void FixedUpdate() {
         if (Input.GetKeyUp(KeyCode.Escape)) {
             LockPlayer();
@@ -74,7 +75,8 @@ public class GameMenu_EventHandler : MonoBehaviour {
 
     public void Event_Exit() {
         Cursor.visible = true;
-        SceneManager.LoadScene("Main_Menu");
+        confirmMenu.SetActive(true);
+        QuestionUIPopup.Instance.ShowQuestion("Are you sure you want to quit the game?", () => { SceneManager.LoadScene("Main_Menu"); }, () => { confirmMenu.SetActive(false); });
     }
 
     public void Event_HoverEnter(TextMeshProUGUI t) {
