@@ -22,6 +22,7 @@ public class Station2 : StationInterface
         if (!isComplete)
         {
             base.lockCamera(player);
+            SingletonUI.Instance.SetNewGeraldUI("Oh so you are using the oven, careful sometimes it leaks...",7);
         }
     }
     private void Update()

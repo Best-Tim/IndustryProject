@@ -287,11 +287,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7934430208102344185, guid: 6e782f1803623c341823d66e788908c5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.433
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7934430208102344185, guid: 6e782f1803623c341823d66e788908c5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.597
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -304,6 +304,14 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 91933594958845467, guid: caaa9b10e28d0bb4a81f3c437e1a666c, type: 3}
+      propertyPath: m_Name
+      value: Smoke
+      objectReference: {fileID: 0}
+    - target: {fileID: 797247830560412564, guid: caaa9b10e28d0bb4a81f3c437e1a666c, type: 3}
+      propertyPath: rotationSpeed
+      value: 135
+      objectReference: {fileID: 0}
     - target: {fileID: 1401707327349749847, guid: caaa9b10e28d0bb4a81f3c437e1a666c, type: 3}
       propertyPath: m_Name
       value: Station 2 (1)
@@ -318,23 +326,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3820866793747545618, guid: caaa9b10e28d0bb4a81f3c437e1a666c, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.43045938
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 3820866793747545618, guid: caaa9b10e28d0bb4a81f3c437e1a666c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.43045938
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 3820866793747545618, guid: caaa9b10e28d0bb4a81f3c437e1a666c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.56098557
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3820866793747545618, guid: caaa9b10e28d0bb4a81f3c437e1a666c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.56098557
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3820866793747545618, guid: caaa9b10e28d0bb4a81f3c437e1a666c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -105
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5237343549379303639, guid: caaa9b10e28d0bb4a81f3c437e1a666c, type: 3}
       propertyPath: m_RootOrder
