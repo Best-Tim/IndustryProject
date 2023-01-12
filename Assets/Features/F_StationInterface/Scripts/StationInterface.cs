@@ -7,15 +7,12 @@ public abstract class StationInterface : MonoBehaviour
 {
     public GameObject playerPosition;
     public bool isComplete = false;
-
     public virtual void reset() { }
     public virtual void WinCondition() { }
-
     public void completeStation()
     {
         isComplete = true;
     }
-
     public virtual void lockCamera(PlayerMovement player)
     {
         if (!player.isLocked)

@@ -9,16 +9,21 @@ public class Station2 : StationInterface
     private ClockHand hand;
     private ParticleController particleController;
     private string[] particles = {"Fire","Smoke","Sparks"};
+    private bool UIPlayed = false;
+
     //temperature so it's readable
     [SerializeField]
     private int temperatureNormalized;
-
-    private bool UIPlayed = false;
+    [SerializeField]
+    private float timerValue = 3f;
+    [SerializeField]
+    private float timerFunctional;
 
     private void Start()
     {
         hand = transform.parent.GetComponentInChildren<ClockHand>(); 
         particleController = transform.parent.GetComponentInChildren<ParticleController>();
+        timerFunctional = timerValue;
     }
     public override void lockCamera(PlayerMovement player)
     {
@@ -45,6 +50,8 @@ public class Station2 : StationInterface
             hand.ButtonNotPressed();
         }
         TranslateToDegrees();
+
+        WinCondition();
     }
     public override void reset()
     {
@@ -52,6 +59,25 @@ public class Station2 : StationInterface
     }
     public override void WinCondition()
     {
+        if (temperatureNormalized >= 30 && temperatureNormalized <= 60)
+        {
+            if (timerFunctional > 0)
+            {
+                timerFunctional -= Time.deltaTime;
+            }
+            else
+            {
+                timerFunctional = 0;
+            }
+            if (timerFunctional == 0)
+            {
+                completeStation();
+            }
+        }
+        else
+        {
+            timerFunctional = timerValue;
+        }
     }
     private void randomizedSequence()
     {
@@ -70,7 +96,6 @@ public class Station2 : StationInterface
             particleController.PlayParticleSequence("Sparks", "Fire", "Smoke");
         }
     }
-
     //clean this, maybe loop with presets and increase counter by 15 intervals
     private void TranslateToDegrees()
     {   

@@ -57,7 +57,6 @@ public class ParticleController : MonoBehaviour
         }
         return null;
     }
-
     public void PlayParticleSequence(string s1, string s2, string s3)
     {
         enumerator = PlayParrticlesSequenceCoroutine(s1, s2, s3);
@@ -81,11 +80,9 @@ public class ParticleController : MonoBehaviour
             {
                 s = s3;
             }
-
             FindCorrectParticle(s).Play();
             yield return new WaitForSecondsRealtime(3);
             FindCorrectParticle(s).Stop();
         }
-        
     }
 }
