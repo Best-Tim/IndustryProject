@@ -13,6 +13,8 @@ public class Station2 : StationInterface
     [SerializeField]
     private int temperatureNormalized;
 
+    private bool UIPlayed = false;
+
     private void Start()
     {
         hand = transform.parent.GetComponentInChildren<ClockHand>(); 
@@ -23,8 +25,13 @@ public class Station2 : StationInterface
         if (!isComplete && !player.isLocked)
         {
             base.lockCamera(player);
-            SingletonUI.Instance.SetNewGeraldUI("Oh so you are using the oven, careful sometimes it leaks...",7);
+            if (!UIPlayed)
+            {
+                SingletonUI.Instance.SetNewGeraldUI("Oh so you are using the oven, careful sometimes it leaks...");
+            }
+            UIPlayed = true;
         }
+        randomizedSequence();
     }
     private void Update()
     {
@@ -32,7 +39,6 @@ public class Station2 : StationInterface
         if (Input.GetKeyDown(KeyCode.Y))
         {
             hand.ButtonPressed();
-            particleController.PlayParticleByName("Fire");
         }
         if (Input.GetKeyUp(KeyCode.Y))
         {
@@ -53,17 +59,18 @@ public class Station2 : StationInterface
 
         if (r == 0)
         {
-            particleController.PlayParticleByName("Fire");
+            particleController.PlayParticleSequence("Fire", "Smoke", "Sparks");
         }
         if (r == 1)
         {
-
+            particleController.PlayParticleSequence("Smoke", "Sparks", "Fire");
         }
         if (r == 2)
         {
-
+            particleController.PlayParticleSequence("Sparks", "Fire", "Smoke");
         }
     }
+
     //clean this, maybe loop with presets and increase counter by 15 intervals
     private void TranslateToDegrees()
     {   

@@ -12,6 +12,8 @@ public class ParticleController : MonoBehaviour
     [SerializeField]
     ParticleSystem sparks;
 
+    public IEnumerator enumerator;
+
     List<Transform> transformOven = new List<Transform>();
     private void Start()
     {
@@ -55,15 +57,35 @@ public class ParticleController : MonoBehaviour
         }
         return null;
     }
-    public void PlayParticleByName(string s)
+
+    public void PlayParticleSequence(string s1, string s2, string s3)
     {
-        IEnumerator enumerator = PlayParticleForAWhile(s);
+        enumerator = PlayParrticlesSequenceCoroutine(s1, s2, s3);
         StartCoroutine(enumerator);
     }
-    private IEnumerator PlayParticleForAWhile(string s)
+    private IEnumerator PlayParrticlesSequenceCoroutine(string s1, string s2, string s3)
     {
-        FindCorrectParticle(s).Play();
-        yield return new WaitForSecondsRealtime(3);
-        FindCorrectParticle(s).Stop();
+        for (int i = 0; i <= 2; i++)
+        {
+            string s = "";
+
+            if (i == 0)
+            {
+                s = s1;
+            }
+            if (i == 1)
+            {
+                s = s2;
+            }
+            if (i==2)
+            {
+                s = s3;
+            }
+
+            FindCorrectParticle(s).Play();
+            yield return new WaitForSecondsRealtime(3);
+            FindCorrectParticle(s).Stop();
+        }
+        
     }
 }
