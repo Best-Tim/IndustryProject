@@ -23,6 +23,5 @@ public abstract class StationInterface : MonoBehaviour
             player.gameObject.transform.position = playerPosition.transform.position;
             player.isLocked = true;
         }
-        
     }
 }

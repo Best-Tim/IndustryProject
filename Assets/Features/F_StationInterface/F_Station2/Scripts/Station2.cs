@@ -20,7 +20,7 @@ public class Station2 : StationInterface
     }
     public override void lockCamera(PlayerMovement player)
     {
-        if (!isComplete)
+        if (!isComplete && !player.isLocked)
         {
             base.lockCamera(player);
             SingletonUI.Instance.SetNewGeraldUI("Oh so you are using the oven, careful sometimes it leaks...",7);
