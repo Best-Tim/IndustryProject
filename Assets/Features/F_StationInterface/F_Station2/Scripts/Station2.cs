@@ -18,7 +18,8 @@ public class Station2 : StationInterface
     private float timerValue = 3f;
     [SerializeField]
     private float timerFunctional;
-
+    [SerializeField]
+    private int sequenceTracker;
     private void Start()
     {
         hand = transform.parent.GetComponentInChildren<ClockHand>(); 
@@ -35,8 +36,8 @@ public class Station2 : StationInterface
                 SingletonUI.Instance.SetNewGeraldUI("Oh so you are using the oven, careful sometimes it leaks...");
             }
             UIPlayed = true;
+            randomizedSequence();
         }
-        randomizedSequence();
     }
     private void Update()
     {
@@ -59,25 +60,74 @@ public class Station2 : StationInterface
     }
     public override void WinCondition()
     {
-        if (temperatureNormalized >= 30 && temperatureNormalized <= 60)
+        //CLEAN THIS CODE PLEASE YOUR SANITY DEPENDS ON IT
+        if (sequenceTracker == 1)
         {
-            if (timerFunctional > 0)
+            if (temperatureNormalized >= 30 && temperatureNormalized <= 60)
             {
-                timerFunctional -= Time.deltaTime;
+                if (timerFunctional > 0)
+                {
+                    timerFunctional -= Time.deltaTime;
+                }
+                else
+                {
+                    timerFunctional = 0;
+                }
+                if (timerFunctional == 0)
+                {
+                    completeStation();
+                }
             }
             else
             {
-                timerFunctional = 0;
-            }
-            if (timerFunctional == 0)
-            {
-                completeStation();
+                timerFunctional = timerValue;
             }
         }
-        else
+        if (sequenceTracker == 2)
         {
-            timerFunctional = timerValue;
+            if (temperatureNormalized >= 60 && temperatureNormalized <= 90)
+            {
+                if (timerFunctional > 0)
+                {
+                    timerFunctional -= Time.deltaTime;
+                }
+                else
+                {
+                    timerFunctional = 0;
+                }
+                if (timerFunctional == 0)
+                {
+                    completeStation();
+                }
+            }
+            else
+            {
+                timerFunctional = timerValue;
+            }
         }
+        if (sequenceTracker == 3)
+        {
+            if (temperatureNormalized >= 90 && temperatureNormalized <= 120)
+            {
+                if (timerFunctional > 0)
+                {
+                    timerFunctional -= Time.deltaTime;
+                }
+                else
+                {
+                    timerFunctional = 0;
+                }
+                if (timerFunctional == 0)
+                {
+                    completeStation();
+                }
+            }
+            else
+            {
+                timerFunctional = timerValue;
+            }
+        }
+        
     }
     private void randomizedSequence()
     {
@@ -86,14 +136,17 @@ public class Station2 : StationInterface
         if (r == 0)
         {
             particleController.PlayParticleSequence("Fire", "Smoke", "Sparks");
+            sequenceTracker = 1;
         }
         if (r == 1)
         {
             particleController.PlayParticleSequence("Smoke", "Sparks", "Fire");
+            sequenceTracker = 2;
         }
         if (r == 2)
         {
             particleController.PlayParticleSequence("Sparks", "Fire", "Smoke");
+            sequenceTracker = 3;
         }
     }
     //clean this, maybe loop with presets and increase counter by 15 intervals

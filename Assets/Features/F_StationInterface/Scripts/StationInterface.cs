@@ -12,6 +12,7 @@ public abstract class StationInterface : MonoBehaviour
     public void completeStation()
     {
         isComplete = true;
+        SingletonUI.Instance.SetNewGeraldUI($"Good job completing {gameObject.name}! On to the next!");
     }
     public virtual void lockCamera(PlayerMovement player)
     {
