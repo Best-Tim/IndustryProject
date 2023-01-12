@@ -28,7 +28,7 @@ public class ParticleController : MonoBehaviour
                 {
                     fire = child.GetComponent<ParticleSystem>();
                 }
-                if (child.gameObject.name == "ChiefKeef")
+                if (child.gameObject.name == "Smoke")
                 {
                     smoke = child.GetComponent<ParticleSystem>();
                 }
@@ -57,10 +57,13 @@ public class ParticleController : MonoBehaviour
     }
     public void PlayParticleByName(string s)
     {
-        FindCorrectParticle(s).Play();
+        IEnumerator enumerator = PlayParticleForAWhile(s);
+        StartCoroutine(enumerator);
     }
-    public void StopParticleByName(string s)
+    private IEnumerator PlayParticleForAWhile(string s)
     {
+        FindCorrectParticle(s).Play();
+        yield return new WaitForSecondsRealtime(3);
         FindCorrectParticle(s).Stop();
     }
 }

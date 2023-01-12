@@ -8,6 +8,7 @@ public class Station2 : StationInterface
 {
     private ClockHand hand;
     private ParticleController particleController;
+    private string[] particles = {"Fire","Smoke","Sparks"};
     //temperature so it's readable
     [SerializeField]
     private int temperatureNormalized;
@@ -36,7 +37,6 @@ public class Station2 : StationInterface
         if (Input.GetKeyUp(KeyCode.Y))
         {
             hand.ButtonNotPressed();
-            particleController.StopParticleByName("Fire");
         }
         TranslateToDegrees();
     }
@@ -47,6 +47,24 @@ public class Station2 : StationInterface
     public override void WinCondition()
     {
     }
+    private void randomizedSequence()
+    {
+        int r = Random.Range(0, particles.Length);
+
+        if (r == 0)
+        {
+            particleController.PlayParticleByName("Fire");
+        }
+        if (r == 1)
+        {
+
+        }
+        if (r == 2)
+        {
+
+        }
+    }
+    //clean this, maybe loop with presets and increase counter by 15 intervals
     private void TranslateToDegrees()
     {   
         //-135 = 15

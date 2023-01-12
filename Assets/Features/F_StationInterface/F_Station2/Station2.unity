@@ -314,7 +314,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1401707327349749847, guid: caaa9b10e28d0bb4a81f3c437e1a666c, type: 3}
       propertyPath: m_Name
-      value: Station 2 (1)
+      value: Station 2
       objectReference: {fileID: 0}
     - target: {fileID: 2506002362779114366, guid: caaa9b10e28d0bb4a81f3c437e1a666c, type: 3}
       propertyPath: clearBehavior
