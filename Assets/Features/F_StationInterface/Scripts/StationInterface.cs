@@ -18,7 +18,11 @@ public abstract class StationInterface : MonoBehaviour
 
     public virtual void lockCamera(PlayerMovement player)
     {
-        player.gameObject.transform.position = playerPosition.transform.position;
-        player.isLocked = true;
+        if (!player.isLocked)
+        {
+            player.gameObject.transform.position = playerPosition.transform.position;
+            player.isLocked = true;
+        }
+        
     }
 }
