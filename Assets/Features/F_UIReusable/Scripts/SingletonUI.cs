@@ -41,7 +41,18 @@ public class SingletonUI : MonoBehaviour
     {
         SingletonUI singletonUIPrefab = Resources.Load<SingletonUI>("SingletonUI");
         instance = Instantiate(singletonUIPrefab);
+        
+        instance.GetComponent<Canvas>().worldCamera = GetUICamera();
         return instance;
+    }
+
+    private static Camera GetUICamera() {
+        foreach (Camera allCamera in Camera.allCameras) {
+            if (allCamera.CompareTag("UICamera")) {
+                return allCamera;
+            }
+        }
+        return Camera.main;
     }
     private void Awake()
     {
