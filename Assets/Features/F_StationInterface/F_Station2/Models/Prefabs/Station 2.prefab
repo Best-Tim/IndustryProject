@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 91933594974189275}
   - component: {fileID: 8718059634526698275}
   m_Layer: 0
-  m_Name: ChiefKeef
+  m_Name: Smoke
   m_TagString: FxTemporaire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4659,7 +4659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9205bc1bbacc90040a998067b5643d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearBehavior: 2
+  clearBehavior: 0
   cameraShake:
     enabled: 0
     useMainCamera: 1
@@ -9570,7 +9570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9205bc1bbacc90040a998067b5643d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearBehavior: 2
+  clearBehavior: 0
   cameraShake:
     enabled: 0
     useMainCamera: 1
@@ -9953,9 +9953,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26c009fdbd82cb14aaf5216a62fcf346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fire: {fileID: 0}
-  smoke: {fileID: 0}
-  sparks: {fileID: 0}
+  fire: {fileID: 5996344705703332134}
+  smoke: {fileID: 91933594974277499}
+  sparks: {fileID: 1429917616892369555}
 --- !u!1 &5418418982726740284
 GameObject:
   m_ObjectHideFlags: 0
@@ -14682,7 +14682,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9205bc1bbacc90040a998067b5643d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearBehavior: 2
+  clearBehavior: 0
   cameraShake:
     enabled: 0
     useMainCamera: 1
@@ -15203,4 +15203,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPosition: {fileID: 5418418982726740284}
   isComplete: 0
+  lightBulb: {fileID: 0}
+  glowMaterial: {fileID: 0}
   temperatureNormalized: 0
+  timerValue: 3
+  timerFunctional: 0
+  sequenceTracker: 0

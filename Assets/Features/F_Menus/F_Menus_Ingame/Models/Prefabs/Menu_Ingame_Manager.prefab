@@ -2316,7 +2316,7 @@ GameObject:
   - component: {fileID: 7713835462211609371}
   m_Layer: 5
   m_Name: Menu_Camera
-  m_TagString: MainCamera
+  m_TagString: UICamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
