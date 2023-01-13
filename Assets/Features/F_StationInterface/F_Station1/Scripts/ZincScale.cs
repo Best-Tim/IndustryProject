@@ -34,12 +34,14 @@ public class ZincScale : MonoBehaviour
 
     [SerializeField] private GameObject liquidCircle;
     [SerializeField] private GameObject liquidFill;
-
+    private AudioManager audioManager;
+    private float steeringAudioRefreshRate = 0f;
     
 
     private void Awake()
     {
         pickUpController = FindObjectOfType<PlayerPickUpController>();
+        audioManager = FindObjectOfType<AudioManager>();
         isStiring = false;
         currentColor = "NEUTRAL";
         colors = new List<Color>();
@@ -53,11 +55,23 @@ public class ZincScale : MonoBehaviour
         if (isStiring)
         {
             stiringCounter += Time.deltaTime;
+            steeringAudioRefreshRate -= Time.deltaTime;
             if (stiringCounter >= changeColorRate)
             {
                 RandomizedColor();
                 stiringCounter = 0;
             }
+            if (steeringAudioRefreshRate <= 0)
+            {
+                audioManager.Play("StirLiquid", false);
+                steeringAudioRefreshRate = 2;
+            }
+
+        }
+        else
+        {
+            audioManager.Stop("StirLiquid");
+            steeringAudioRefreshRate = 0;
         }
     }
 
@@ -96,7 +110,9 @@ public class ZincScale : MonoBehaviour
                 currentCottonCount++;
                 currentCottons.Add(other.gameObject);
                 Instantiate(waterEffect, liquidTransform.position, waterEffect.transform.rotation);
+                audioManager.Play("Splash", false);
                 Destroy(other.gameObject);
+
             }
             else 
             {
@@ -120,6 +136,7 @@ public class ZincScale : MonoBehaviour
     public void Explode()
     {
         Instantiate(explosionVX, gameObject.transform.position + new Vector3(0, .5f, 0), Quaternion.identity);
+        audioManager.Play("Explosion", false);
     }
 
     public void LockHandleToBowl(GameObject handle)
