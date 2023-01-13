@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1990994190602038022}
   - component: {fileID: 5551488612831331227}
   - component: {fileID: 3563786495195338572}
+  - component: {fileID: 685949823348316555}
   m_Layer: 0
   m_Name: ZincChloride1
   m_TagString: Untagged
@@ -37,6 +38,7 @@ Transform:
   - {fileID: 683340668077063223}
   - {fileID: 249920291428849010}
   - {fileID: 4956668920654383765}
+  - {fileID: 1476070672889951054}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -143,8 +145,21 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.045
-  m_Center: {x: 0, y: 0.037, z: 0}
+  m_Radius: 0.03828146
+  m_Center: {x: 0, y: 0.03494164, z: 5.32858e-16}
+--- !u!114 &685949823348316555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993211570414031129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cb11759b7145b247835e5c21b6bff7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hiddenText: {fileID: 1823628762843067244}
 --- !u!1 &1504030899043295412
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,6 +244,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2606515260998207040
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1476070672889951054}
+  m_Layer: 0
+  m_Name: BodyCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1476070672889951054
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2606515260998207040}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.31057, y: 0.08746272, z: 0.31057}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 993211570413735225}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5057801866126080318
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,7 +503,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Acid - Scale 1
+  m_text: ZnCl Acid - small size
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 623b431170e168a41abee2ecee9afdd0, type: 2}
   m_sharedMaterial: {fileID: -8880709894640364114, guid: 623b431170e168a41abee2ecee9afdd0, type: 2}

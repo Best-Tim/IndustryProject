@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1990994190602038022}
   - component: {fileID: 5551488612831331227}
   - component: {fileID: 3563786495195338572}
+  - component: {fileID: -2695589822152823604}
   m_Layer: 0
   m_Name: ZincChloride3
   m_TagString: Untagged
@@ -143,8 +144,21 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.045
+  m_Radius: 0.035952058
   m_Center: {x: 0, y: 0.037, z: 0}
+--- !u!114 &-2695589822152823604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993211570414031129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cb11759b7145b247835e5c21b6bff7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hiddenText: {fileID: 7913712908137551829}
 --- !u!1 &2079713014764583125
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,7 +259,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Acid - Scale 3
+  m_text: ZnCl Acid - large size
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 623b431170e168a41abee2ecee9afdd0, type: 2}
   m_sharedMaterial: {fileID: -8880709894640364114, guid: 623b431170e168a41abee2ecee9afdd0, type: 2}
