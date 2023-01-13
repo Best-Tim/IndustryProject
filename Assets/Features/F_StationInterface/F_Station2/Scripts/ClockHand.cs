@@ -1,67 +1,91 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class ClockHand : MonoBehaviour
 {
-    public int hourClock;
-    public int random;
-    public bool startClock = false;
+    public int Temp { get; private set; }
+    private bool buttonPressed = false;
 
     [SerializeField]
-    private int rotationSpeed = 200;
-    private int[] startingPos = { 0, 90, 180, 270 };
+    private int rotationSpeed = 135;
 
-    private bool buttonPressed = false;
     void clockHandInit()
     {
-        random = UnityEngine.Random.Range(0, 3);
-        //Rotate(startingPos[random]); 
-        gameObject.transform.eulerAngles = new Vector3(0, 0, startingPos[random]);
-        random = startingPos[random];
+        gameObject.transform.eulerAngles = new Vector3(0, 0, 225.1f);
+        Temp= 0;
     }
     private void Start()
     {
         clockHandInit();
     }
-    public void StartClock()
-    {
-        startClock = true;
-    }
     private void Update()
     {
-        if (!buttonPressed && startClock)
+        if (buttonPressed && isInBounds())
         {
             Rotate(rotationSpeed);
+        }
 
-            if (Mathf.Round(gameObject.transform.eulerAngles.z) % 30 == 0)
+        if (!buttonPressed && isInBounds()) 
+        {
+            Rotate(-rotationSpeed);
+        }
+        if (!isInBounds())
+        {
+            clockHandInit();
+        }
+        setTemp();
+    }
+    private void setTemp()
+    {
+        if (Mathf.Round(gameObject.transform.eulerAngles.z) % 15 == 0)
+        {
+            Temp = Convert.ToInt32(Mathf.Round(gameObject.transform.eulerAngles.z) / 15);
+            if (Temp == 0)
             {
-                hourClock = Convert.ToInt32(Mathf.Round(gameObject.transform.eulerAngles.z) / 30);
-                //11 = 11
-                //12 = 0
-                //1 = 1
+                Temp = 24;
             }
         }
     }
-    public void StopLoop()
+    private bool isInBounds()
     {
-        buttonPressed = true;
+        float zAngle = gameObject.transform.eulerAngles.z;
+        if (zAngle > 225 && zAngle < 495)
+        {
+            return true;
+        }
+        if (zAngle <= 135 && zAngle > -135)
+        {
+            return true;
+        }
+        return false;
     }
-    public void StartLoop()
+    private bool isOutBounds()
+    {
+        if (gameObject.transform.eulerAngles.z < -135 || gameObject.transform.eulerAngles.z >= 135)
+        {
+            return true;
+        }
+        return false;
+    }
+    public void ButtonNotPressed()
     {
         buttonPressed = false;
+    }
+    public void ButtonPressed()
+    {
+           buttonPressed = true;
     }
     private void Rotate(float zValue)
     {
         this.gameObject.transform.Rotate(new Vector3(0, 0, zValue) * Time.deltaTime);
-
     }
     public void Reset()
     {
-        gameObject.transform.eulerAngles = new Vector3(0,0,0);
-        hourClock = 0;
-        startClock = false;
         clockHandInit();
+        ButtonNotPressed();
     }
 }
