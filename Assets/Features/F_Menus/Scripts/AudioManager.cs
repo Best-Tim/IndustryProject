@@ -34,6 +34,12 @@ public class AudioManager : MonoBehaviour
         s.audioSource.Stop();
     }
 
+    public Sound GetSoundName(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        return s;
+    }
+
     // Update is called once per frame
     void Update()
     {
