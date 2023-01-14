@@ -11,12 +11,13 @@ public class ParticleController : MonoBehaviour
     ParticleSystem smoke;
     [SerializeField]
     ParticleSystem sparks;
-
+    private AudioManager audioManager;
     public IEnumerator enumerator;
 
     List<Transform> transformOven = new List<Transform>();
     private void Start()
     {
+        audioManager = FindObjectOfType<AudioManager>();
         transformOven.AddRange(GetComponentsInChildren<Transform>());
 
         Transform parent = this.transform;
@@ -39,6 +40,33 @@ public class ParticleController : MonoBehaviour
                     sparks = child.GetComponent<ParticleSystem>();
                 }
             }
+        }
+    }
+    private void PlayCorrectSound(string s)
+    {
+
+        if (s == "Fire")
+        {
+            audioManager.Play("FIRE", false);
+        }
+        if (s == "Smoke")
+        {
+
+            audioManager.Play("SMOKE", false);
+
+        }
+        if (s == "Sparks")
+        {
+            audioManager.Play("SPARKS", false);
+
+        }
+
+    }
+    private void StopIncorrectSounds()
+    {
+        foreach (Sound sound in audioManager.sounds)
+        {
+            sound.audioSource.Stop();
         }
     }
     private ParticleSystem FindCorrectParticle(string s)
@@ -81,8 +109,10 @@ public class ParticleController : MonoBehaviour
                 s = s3;
             }
             FindCorrectParticle(s).Play();
+            PlayCorrectSound(s);
             yield return new WaitForSecondsRealtime(3);
             FindCorrectParticle(s).Stop();
+            StopIncorrectSounds();
         }
     }
 }

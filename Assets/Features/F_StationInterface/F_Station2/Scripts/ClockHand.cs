@@ -12,6 +12,7 @@ public class ClockHand : MonoBehaviour
 
     [SerializeField]
     private int rotationSpeed = 135;
+    private AudioManager audioManager;
 
     void clockHandInit()
     {
@@ -21,6 +22,7 @@ public class ClockHand : MonoBehaviour
     private void Start()
     {
         clockHandInit();
+        audioManager = FindObjectOfType<AudioManager>();
     }
     private void Update()
     {
@@ -74,10 +76,15 @@ public class ClockHand : MonoBehaviour
     public void ButtonNotPressed()
     {
         buttonPressed = false;
+        audioManager.Stop("Scale");
+        audioManager.Play("ScaleDown",false);
+
     }
     public void ButtonPressed()
     {
            buttonPressed = true;
+        audioManager.Stop("ScaleDown");
+        audioManager.Play("Scale", true);
     }
     private void Rotate(float zValue)
     {
