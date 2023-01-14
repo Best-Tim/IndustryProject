@@ -48,6 +48,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 audioManager.Stop("Footsteps");
             }
+
+            if (GetComponent<PlayerPickUpController>().currentStation != null)
+            {
+                audioManager.Stop("Footsteps");
+            }
         }
     }
 }

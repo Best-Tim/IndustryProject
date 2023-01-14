@@ -24,7 +24,7 @@ public class PlayerPickUpController : MonoBehaviour
     private Rigidbody heldRB;
     [SerializeField] private Transform heldObjTransform;
 
-    private StationInterface currentStation;
+    public StationInterface currentStation;
 
     private AudioManager audioManager;
 
@@ -65,10 +65,13 @@ public class PlayerPickUpController : MonoBehaviour
                     //LOCKING IN TO A STATION
                     if (raycastHit.transform.gameObject.TryGetComponent(out StationInterface sI))
                     {
-                        sI.lockCamera(playerMovement);
-                        isAbleToPickup = true;
-                        currentStation = sI;
-                        audioManager.Play("LockToStation", false);
+                        if (currentStation == null)
+                        {
+                            sI.lockCamera(playerMovement);
+                            isAbleToPickup = true;
+                            currentStation = sI;
+                            audioManager.Play("LockToStation", false);
+                        }
                     }
 
                     //PRESSING THE BUTTON TO COMPLETE THE STATION
@@ -119,6 +122,7 @@ public class PlayerPickUpController : MonoBehaviour
             playerMovement.isLocked = false;
             isAbleToPickup = false;
             currentStation.reset();
+            currentStation = null;
         }
 
         //If you want to rotate an object and not move it
