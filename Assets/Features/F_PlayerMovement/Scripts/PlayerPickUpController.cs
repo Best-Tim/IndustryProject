@@ -112,9 +112,12 @@ public class PlayerPickUpController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            playerMovement.isLocked = false;
-            isAbleToPickup = false;
-            currentStation.reset();
+            if (playerMovement.isLocked)
+            {
+                playerMovement.isLocked = false;
+                isAbleToPickup = false;
+                currentStation.reset();
+            }
         }
 
         //If you want to rotate an object and not move it
