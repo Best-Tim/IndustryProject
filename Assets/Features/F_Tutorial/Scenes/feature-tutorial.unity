@@ -350,15 +350,8 @@ MonoBehaviour:
   cotton: {fileID: 2100000, guid: 4de8464aec2e5274f8a93a4835966457, type: 2}
   metal: {fileID: 2100000, guid: 58ee55e80155e2549ae1023e4963e0ba, type: 2}
   skipToStep: 0
-  popupTextList:
-  - Look at the red lights to turn them green!
-  - Press the "W, A, S, D" keys!
-  - Move toward the highlighted table.
-  - Pick up the highlighted object and put it in the bowl on the right.
-  - Good job! You've completed the tutorial!
-  IntroductionText:
-  - Hello
-  - GG NOOBS
+  popupTextList: []
+  IntroductionText: []
 --- !u!4 &57536478
 Transform:
   m_ObjectHideFlags: 0
@@ -1279,6 +1272,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 443770241, guid: 48c670bff1796e4469f5126d4b831304, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7713835463156068821, guid: 48c670bff1796e4469f5126d4b831304, type: 3}
       propertyPath: m_Name
       value: Menu_Ingame_Manager

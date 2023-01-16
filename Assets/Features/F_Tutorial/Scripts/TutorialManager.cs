@@ -43,6 +43,7 @@ public class TutorialManager : MonoBehaviour {
         keysPressed = new List<string>();
         targetsLookedAt = new List<GameObject>();
         playerMovement.isInMenu = true;
+        PopulateWelcome();
         PopulatePopups();
         #if UNITY_EDITOR
                 popUpIndex = skipToStep;
@@ -51,7 +52,20 @@ public class TutorialManager : MonoBehaviour {
         #endif
     }
 
+    public void PopulateWelcome() {
+        var localizationTutorial = LocalizationManager.Instance.GetParsedLanguage.localization.tutorial_introduction;
+        IntroductionText.Add(localizationTutorial.step1);
+        IntroductionText.Add(localizationTutorial.step2);
+        IntroductionText.Add(localizationTutorial.step3);
+    }
+
     public void PopulatePopups() {
+        var localizationTutorial = LocalizationManager.Instance.GetParsedLanguage.localization.tutorial_popups;
+        popupTextList.Add(localizationTutorial.step1);
+        popupTextList.Add(localizationTutorial.step2);
+        popupTextList.Add(localizationTutorial.step3);
+        popupTextList.Add(localizationTutorial.step4);
+        popupTextList.Add(localizationTutorial.step5);
         int maxLength = Mathf.Min(popupTextList.Count, popup_holder.childCount);
         for (int i = 0; i < maxLength; i++) {
             popup_holder.GetChild(i).GetComponent<TextMeshProUGUI>().text = popupTextList[i];
