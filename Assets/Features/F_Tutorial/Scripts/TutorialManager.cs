@@ -39,7 +39,7 @@ public class TutorialManager : MonoBehaviour {
     private AudioManager audioManager;
 
     private void Start() {
-        audioManager = GetComponent<AudioManager>();
+        audioManager = FindObjectOfType<AudioManager>();
         playerCam = FindObjectOfType<PlayerCam>();
         popUpIndex = 0;
         keysPressed = new List<string>();
