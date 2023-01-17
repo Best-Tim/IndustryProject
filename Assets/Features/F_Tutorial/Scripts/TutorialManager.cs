@@ -36,8 +36,10 @@ public class TutorialManager : MonoBehaviour {
     private List<string> popupTextList;
 
     PlayerCam playerCam;
+    private AudioManager audioManager;
 
     private void Start() {
+        audioManager = FindObjectOfType<AudioManager>();
         playerCam = FindObjectOfType<PlayerCam>();
         popUpIndex = 0;
         keysPressed = new List<string>();
@@ -136,11 +138,16 @@ public class TutorialManager : MonoBehaviour {
             case 5:
                 //Popuptextbox with geralt
                 ShowStepPopupText(4);
-                
+
                 //Popup 5 will be the victory screen
-                playerMovement.isInMenu = true;
+                StartCoroutine(LoadNextSceneWithWait());
                 break;
         }
+    }
+    private IEnumerator LoadNextSceneWithWait()
+    {
+        yield return new WaitForSeconds(7f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
     private void ShowStepPopupText(int i) {
@@ -184,8 +191,6 @@ public class TutorialManager : MonoBehaviour {
             popUpIndex++;
             TutorialStepSetupIsDone = false;
         }
-
-        
     }
 
     private void AddShaderToObject(List<GameObject> objects) {
@@ -212,7 +217,8 @@ public class TutorialManager : MonoBehaviour {
         if (Physics.Raycast(ray, out RaycastHit hit, 100)) {
             if (hit.transform.TryGetComponent(out LookTutorialTarget lookTutorialTarget)) {
                 if (lookTutorialTarget.IsLookedAt()) {
-                    targetsLookedAt.Add(hit.transform.gameObject); 
+                    targetsLookedAt.Add(hit.transform.gameObject);
+                    audioManager.Play("LightOn", false);
                 }
             }
         }
