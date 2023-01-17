@@ -124,9 +124,9 @@ public class TutorialManager : MonoBehaviour {
             case 5:
                 //Popuptextbox with geralt
                 ShowStepPopupText(4);
-                
+
                 //Popup 5 will be the victory screen
-                playerMovement.isInMenu = true;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
                 break;
         }
     }
