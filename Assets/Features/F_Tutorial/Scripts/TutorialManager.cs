@@ -36,8 +36,10 @@ public class TutorialManager : MonoBehaviour {
     private List<string> popupTextList;
 
     PlayerCam playerCam;
+    private AudioManager audioManager;
 
     private void Start() {
+        audioManager = GetComponent<AudioManager>();
         playerCam = FindObjectOfType<PlayerCam>();
         popUpIndex = 0;
         keysPressed = new List<string>();
@@ -198,7 +200,8 @@ public class TutorialManager : MonoBehaviour {
         if (Physics.Raycast(ray, out RaycastHit hit, 100)) {
             if (hit.transform.TryGetComponent(out LookTutorialTarget lookTutorialTarget)) {
                 if (lookTutorialTarget.IsLookedAt()) {
-                    targetsLookedAt.Add(hit.transform.gameObject); 
+                    targetsLookedAt.Add(hit.transform.gameObject);
+                    audioManager.Play("LightOn", false);
                 }
             }
         }
