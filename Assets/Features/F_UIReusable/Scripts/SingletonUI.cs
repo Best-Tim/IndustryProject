@@ -152,6 +152,7 @@ public class SingletonUI : MonoBehaviour
     
     IEnumerator CoroutineCoordinator()
     {
+            int n = 1;
             while (queue.Count >0)
             {
                 yield return StartCoroutine(queue.Dequeue());
