@@ -8,6 +8,7 @@ public class Station2 : StationInterface
 {
     private ClockHand hand;
     private ParticleController particleController;
+    private OvenCollider OvenCollider;
     private string[] particles = {"Fire","Smoke","Sparks"};
     private bool UIPlayed = false;
     private AudioManager audioManager;
@@ -17,14 +18,13 @@ public class Station2 : StationInterface
     private int temperatureNormalized;
     [SerializeField]
     private float timerValue = 3f;
-    [SerializeField]
     private float timerFunctional;
-    [SerializeField]
     private int sequenceTracker;
     private void Start()
     {
         hand = transform.parent.GetComponentInChildren<ClockHand>(); 
         particleController = transform.parent.GetComponentInChildren<ParticleController>();
+        OvenCollider = gameObject.GetComponentInChildren<OvenCollider>(); 
         timerFunctional = timerValue;
     }
     public override void lockCamera(PlayerMovement player)
@@ -39,11 +39,14 @@ public class Station2 : StationInterface
                 SingletonUI.Instance.SetNewGeraldUI("Oh so you are using the oven, careful sometimes it leaks...",audioManager.GetSoundName("OvenGreeting").audioClip.length +1f);
             }
             UIPlayed = true;
-            randomizedSequence();
         }
     }
     private void Update()
     {
+        if (OvenCollider.carbonPlaced)
+        {
+            randomizedSequence();
+        }
         //for testing
         if (Input.GetKeyDown(KeyCode.Y))
         {
@@ -60,6 +63,7 @@ public class Station2 : StationInterface
     public override void reset()
     {
         hand.Reset();
+        OvenCollider.ResetOven();
     }
     public override void WinCondition()
     {
@@ -133,7 +137,6 @@ public class Station2 : StationInterface
                 timerFunctional = timerValue;
             }
         }
-        
     }
     private void randomizedSequence()
     {
@@ -154,6 +157,7 @@ public class Station2 : StationInterface
             particleController.PlayParticleSequence("Sparks", "Fire", "Smoke");
             sequenceTracker = 3;
         }
+        OvenCollider.carbonPlaced = false;
     }
     //clean this, maybe loop with presets and increase counter by 15 intervals
     private void TranslateToDegrees()
