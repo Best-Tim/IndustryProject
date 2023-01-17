@@ -3,13 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Events;
 
+[System.Serializable]
+public class MessageDoneEventWithID : UnityEvent<int>
+{
+}
 public class SingletonUI : MonoBehaviour
 {
     private IEnumerator notificationCoroutine;
     private static SingletonUI instance;
     private Queue<IEnumerator> queue = new Queue<IEnumerator>();
 
+    public delegate void OnMessageDone<T>(object sender, int id);
+    public static event OnMessageDone<int> onMessageDone;
+    
     //text limit size: 80 chars
     [SerializeField] private TextMeshProUGUI notificationText;
     //make private public for testing
@@ -90,7 +98,7 @@ public class SingletonUI : MonoBehaviour
         float t = 0;
         while (t<fadeTime)
         {
-            t += Time.unscaledDeltaTime;
+            t += Time.deltaTime;
             notificationText.color = fadeOut(notificationText.color, t);
 
             foreach (var i in images)
@@ -109,7 +117,7 @@ public class SingletonUI : MonoBehaviour
         float t = 0;
         while (t < n)
         {
-            t += Time.unscaledDeltaTime;
+            t += Time.deltaTime;
             notificationText.color = fadeOut(notificationText.color, t, n);
 
             foreach (var i in images)
@@ -141,15 +149,16 @@ public class SingletonUI : MonoBehaviour
     {
         StartCoroutine(CoroutineCoordinator());
     }
+    
     IEnumerator CoroutineCoordinator()
     {
-        while (true)
-        {
             while (queue.Count >0)
             {
                 yield return StartCoroutine(queue.Dequeue());
             }
+            onMessageDone?.Invoke(this, 1);
+            Destroy(this.gameObject);
             yield return null;
-        }
     }
 }
+
