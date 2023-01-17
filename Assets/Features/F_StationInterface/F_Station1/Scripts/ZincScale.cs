@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -15,9 +14,6 @@ public class ZincScale : MonoBehaviour
     
 
     public GameObject explosionVX;
-    public GameObject waterEffect;
-
-    public Transform liquidTransform;
     
     public Transform handlePos;
     
@@ -27,22 +23,21 @@ public class ZincScale : MonoBehaviour
     private float stiringCounter;
     
     public float changeColorRate = 3;
-    public Color color1, color2, color3;
+    private Color color1, color2, color3;
     private List<Color> colors;
-    public String currentColor;
-    [SerializeField] private Material changableMaterial;
-
-    [SerializeField] private GameObject liquidCircle;
-    [SerializeField] private GameObject liquidFill;
-
+    public Color currentColor;
     
 
     private void Awake()
     {
         pickUpController = FindObjectOfType<PlayerPickUpController>();
         isStiring = false;
-        currentColor = "NEUTRAL";
+        currentColor = Color.white;
         colors = new List<Color>();
+        color1 = Color.blue;
+        color2 = Color.red;
+        color3 = Color.green;
+        
         colors.Add(color1);
         colors.Add(color2);
         colors.Add(color3);
@@ -64,26 +59,11 @@ public class ZincScale : MonoBehaviour
     public void RandomizedColor()
     {
         int random = Random.Range(0, colors.Count);
-        
-        Material currentMaterial = liquidFill.GetComponent<MeshRenderer>().material;
-        currentMaterial = changableMaterial;
-        currentMaterial.color = colors[random];
-        liquidFill.GetComponent<MeshRenderer>().material = currentMaterial;
-        
-        liquidCircle.GetComponent<SpriteRenderer>().color = colors[random];
-        if (colors[random] == color1)
+        foreach (var cotton in currentCottons)
         {
-            currentColor = "RED";
+            cotton.GetComponent<MeshRenderer>().material.color = colors[random];
+            currentColor = colors[random];
         }
-        else if (colors[random] == color2)
-        {
-            currentColor = "GREEN";
-        }
-        else if (colors[random] == color3)
-        {
-            currentColor = "BLUE";
-        }
-        Instantiate(waterEffect, liquidTransform.position, waterEffect.transform.rotation);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -95,42 +75,23 @@ public class ZincScale : MonoBehaviour
             {
                 currentCottonCount++;
                 currentCottons.Add(other.gameObject);
-                Instantiate(waterEffect, liquidTransform.position, waterEffect.transform.rotation);
-                Destroy(other.gameObject);
             }
             else 
             {
                 Destroy(other.gameObject);
-                Explode();
+                Instantiate(explosionVX, gameObject.transform.position + new Vector3(0,.5f,0), Quaternion.identity);
             }
         }
         else if (other.gameObject.CompareTag("PickUp"))
         {
-            // other.gameObject.tag = "Rotatable";
-            // pickUpController.DropObject();
-            // pickUpController.rotateObject = other.gameObject;
-            // other.gameObject.transform.position = handlePos.position;
-            // other.gameObject.transform.rotation = handlePos.rotation;
-            // Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
-            // rb.constraints = RigidbodyConstraints.FreezeAll;
-            // rb.useGravity = false;
+            other.gameObject.tag = "Rotatable";
+            pickUpController.DropObject();
+            pickUpController.rotateObject = other.gameObject;
+            other.gameObject.transform.position = handlePos.position;
+            other.gameObject.transform.rotation = handlePos.rotation;
+            Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+            rb.useGravity = false;
         }
-    }
-
-    public void Explode()
-    {
-        Instantiate(explosionVX, gameObject.transform.position + new Vector3(0, .5f, 0), Quaternion.identity);
-    }
-
-    public void LockHandleToBowl(GameObject handle)
-    {
-        handle.tag = "Rotatable";
-        pickUpController.DropObject();
-        pickUpController.rotateObject = handle;
-        handle.transform.position = handlePos.position;
-        handle.transform.rotation = handlePos.rotation;
-        Rigidbody rb = handle.GetComponent<Rigidbody>();
-        rb.constraints = RigidbodyConstraints.FreezeAll;
-        rb.useGravity = false;
     }
 }
