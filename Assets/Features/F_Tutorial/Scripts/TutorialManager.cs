@@ -177,8 +177,6 @@ public class TutorialManager : MonoBehaviour {
             popUpIndex++;
             TutorialStepSetupIsDone = false;
         }
-
-        
     }
 
     private void AddShaderToObject(List<GameObject> objects) {
