@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class LookTutorialTarget : MonoBehaviour {
     private bool isDone;
-    public GameObject lightOn;
-    public GameObject lightOff;
+    public Light targetLight;
 
     private void Start() {
         isDone = false;
@@ -14,8 +13,7 @@ public class LookTutorialTarget : MonoBehaviour {
 
     public bool IsLookedAt() {
         if (!isDone) {
-            lightOff.SetActive(false);
-            lightOn.SetActive(true);
+            targetLight.color = Color.green;
             isDone = true;
             return true;
         }
