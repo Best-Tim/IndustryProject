@@ -63,11 +63,11 @@ public class Station1 : StationInterface
         foreach (Transform t in cottonParent.transform.GetComponentInChildren<Transform>())
         {
             int i = Random.Range(0, availableMaterials.Count);
-            GameObject g = Instantiate(availableMaterials[i], t.position, Quaternion.identity, gameObject.transform.parent); 
+            GameObject g = Instantiate(availableMaterials[i], t.position, gameObject.transform.rotation, gameObject.transform.parent); 
             availableMaterials.RemoveAt(i);
             currentMaterials.Add(g);
         }
-        GameObject zinc = Instantiate(zincBowls[Random.Range(0,zincBowls.Count)], zincLocation.position, Quaternion.identity, gameObject.transform.parent);
+        GameObject zinc = Instantiate(zincBowls[Random.Range(0,zincBowls.Count)], zincLocation.position, gameObject.transform.rotation, gameObject.transform.parent);
         currentZinc = zinc.GetComponent<ZincScale>();
         stirringHandle = Instantiate(stirringHandlePrefab, stirringHandleSpawnPos.transform.position,
             stirringHandleSpawnPos.transform.rotation);
