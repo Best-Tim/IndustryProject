@@ -126,9 +126,14 @@ public class TutorialManager : MonoBehaviour {
                 ShowStepPopupText(4);
 
                 //Popup 5 will be the victory screen
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+                StartCoroutine(LoadNextSceneWithWait());
                 break;
         }
+    }
+    private IEnumerator LoadNextSceneWithWait()
+    {
+        yield return new WaitForSeconds(7f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
     private void ShowStepPopupText(int i) {
