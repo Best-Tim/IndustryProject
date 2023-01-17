@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
                     audioManager.Play("Footsteps", true);
                 }
             }
-            else if(isLocked)
+            else
             {
                 audioManager.Stop("Footsteps");
             }
