@@ -10,6 +10,7 @@ public class Station2 : StationInterface
     private ParticleController particleController;
     private string[] particles = {"Fire","Smoke","Sparks"};
     private bool UIPlayed = false;
+    private AudioManager audioManager;
 
     //temperature so it's readable
     [SerializeField]
@@ -28,12 +29,14 @@ public class Station2 : StationInterface
     }
     public override void lockCamera(PlayerMovement player)
     {
+        audioManager = FindObjectOfType<AudioManager>();
         if (!isComplete && !player.isLocked)
         {
+            audioManager.Play("OvenGreeting", false);
             base.lockCamera(player);
             if (!UIPlayed)
             {
-                SingletonUI.Instance.SetNewGeraldUI("Oh so you are using the oven, careful sometimes it leaks...");
+                SingletonUI.Instance.SetNewGeraldUI("Oh so you are using the oven, careful sometimes it leaks...",audioManager.GetSoundName("OvenGreeting").audioClip.length +1f);
             }
             UIPlayed = true;
             randomizedSequence();
@@ -75,6 +78,7 @@ public class Station2 : StationInterface
                 }
                 if (timerFunctional == 0)
                 {
+                    
                     completeStation();
                 }
             }
@@ -97,6 +101,7 @@ public class Station2 : StationInterface
                 }
                 if (timerFunctional == 0)
                 {
+                    
                     completeStation();
                 }
             }
@@ -119,6 +124,7 @@ public class Station2 : StationInterface
                 }
                 if (timerFunctional == 0)
                 {
+                    
                     completeStation();
                 }
             }

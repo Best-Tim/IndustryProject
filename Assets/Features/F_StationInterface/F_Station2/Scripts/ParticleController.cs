@@ -66,6 +66,7 @@ public class ParticleController : MonoBehaviour
     {
         foreach (Sound sound in audioManager.sounds)
         {
+            if(sound.audioClip.name =="FIRE" || sound.audioClip.name == "SMOKE" || sound.audioClip.name == "SPARKS")
             sound.audioSource.Stop();
         }
     }

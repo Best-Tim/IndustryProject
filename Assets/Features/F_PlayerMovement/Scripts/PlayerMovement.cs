@@ -37,14 +37,14 @@ public class PlayerMovement : MonoBehaviour
 
             controller.Move(velocity * Time.deltaTime);
 
-            if (x != 0 || z != 0)
+            if (x != 0 || z != 0 )
             {
-                if (!audioManager.GetSoundName("Footsteps").audioSource.isPlaying)
+                if (!audioManager.GetSoundName("Footsteps").audioSource.isPlaying && !isLocked)
                 {
                     audioManager.Play("Footsteps", true);
                 }
             }
-            else
+            else if(isLocked)
             {
                 audioManager.Stop("Footsteps");
             }
