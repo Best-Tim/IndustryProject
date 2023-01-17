@@ -19,4 +19,8 @@ public class SceneController : MonoBehaviour
     {
         Application.Quit();
     }    
+    public void OpenManualLink()
+    {
+        Application.OpenURL("https://drive.google.com/file/d/1qeMnhSipmkrko5PoDswLq_-wU4uP0PYZ/view?usp=share_link");
+    }
 }
