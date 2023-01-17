@@ -51,7 +51,6 @@ public class Station1 : StationInterface
             }
             Destroy(currentMaterials[i]);
         }
-        currentZinc.Explode();
         Destroy(currentZinc.gameObject);
         Destroy(stirringHandle);
         SpawnObjects();
@@ -118,6 +117,7 @@ public class Station1 : StationInterface
         else if (!isFinished)
         {
             reset();
+            currentZinc.Explode();
         }
     }
     int CottonSwitch(int scale)
