@@ -322,7 +322,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3562059890220343607, guid: 1fefc1028f4cfec4eb55b5d72c1e2a42, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.9890003
+      value: 1.507
       objectReference: {fileID: 0}
     - target: {fileID: 3562059890220343607, guid: 1fefc1028f4cfec4eb55b5d72c1e2a42, type: 3}
       propertyPath: m_LocalPosition.y
@@ -330,11 +330,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3562059890220343607, guid: 1fefc1028f4cfec4eb55b5d72c1e2a42, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.749
+      value: 3.441
       objectReference: {fileID: 0}
     - target: {fileID: 3562059890220343607, guid: 1fefc1028f4cfec4eb55b5d72c1e2a42, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3562059890220343607, guid: 1fefc1028f4cfec4eb55b5d72c1e2a42, type: 3}
       propertyPath: m_LocalRotation.x
@@ -342,7 +342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3562059890220343607, guid: 1fefc1028f4cfec4eb55b5d72c1e2a42, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3562059890220343607, guid: 1fefc1028f4cfec4eb55b5d72c1e2a42, type: 3}
       propertyPath: m_LocalRotation.z
@@ -354,7 +354,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3562059890220343607, guid: 1fefc1028f4cfec4eb55b5d72c1e2a42, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 3562059890220343607, guid: 1fefc1028f4cfec4eb55b5d72c1e2a42, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -875,11 +875,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7934430208378381647, guid: 6e782f1803623c341823d66e788908c5, type: 3}
       propertyPath: field of view
-      value: 60.000004
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 7934430208378381647, guid: 6e782f1803623c341823d66e788908c5, type: 3}
       propertyPath: m_FocalLength
-      value: 20.78461
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7934430208378381647, guid: 6e782f1803623c341823d66e788908c5, type: 3}
       propertyPath: m_GateFitMode
