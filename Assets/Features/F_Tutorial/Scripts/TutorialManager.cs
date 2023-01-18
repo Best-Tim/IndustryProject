@@ -39,7 +39,8 @@ public class TutorialManager : MonoBehaviour {
     private AudioManager audioManager;
 
     private void Start() {
-        audioManager = FindObjectOfType<AudioManager>();
+        audioManager = FindObjectOfType<AudioManager>();       
+
         playerCam = FindObjectOfType<PlayerCam>();
         popUpIndex = 0;
         keysPressed = new List<string>();
@@ -93,6 +94,7 @@ public class TutorialManager : MonoBehaviour {
         switch (popUpIndex) {
             case 0:
                 //Start up the instruction text
+
                 InstructionInitialize();
                 if (InstructionCount >= IntroductionText.Count) {
                     popUpIndex++;
@@ -152,7 +154,8 @@ public class TutorialManager : MonoBehaviour {
 
     private void ShowStepPopupText(int i) {
         if (!TutorialStepSetupIsDone) {
-            SingletonUI.Instance.SetNewGeraldUI(popupTextList[i], 2);
+            audioManager.PlaySoundsForTutorial(audioManager.tutorialSounds[i+1]);
+            SingletonUI.Instance.SetNewGeraldUI(popupTextList[i], audioManager.tutorialSounds[i+1].audioClip.length);
             #if UNITY_EDITOR_64
                         Debug.Log("Index: "+ popUpIndex);
                         Debug.Log("I: "+ i);
@@ -167,13 +170,14 @@ public class TutorialManager : MonoBehaviour {
     private void InstructionInitialize() {
         if (!setText) {
             SingletonUI.onMessageDone += InstructionsDone;
-            
+
             foreach (string instruction in IntroductionText) {
-                SingletonUI.Instance.SetNewGeraldUI(instruction);
-            }
+                audioManager.Play("WelcomeTutorial", false);
+               SingletonUI.Instance.SetNewGeraldUI(instruction,audioManager.GetSoundName("WelcomeTutorial").audioClip.length);
+            }           
             setText = true;
         }
-    }
+    }    
 
     private void InstructionsDone(object o, int i) {
         Debug.Log("Event Evoked");
