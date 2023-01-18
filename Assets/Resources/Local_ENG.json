@@ -17,5 +17,17 @@
         "step3": "Now try to move towards the highlighted table and click on it.",
         "step4": "Pick up the highlighted object and drop it in the vial.",
         "step5": "Well done! You have now completed the tutorial."
+    },
+    "menu_ingame": {
+        "questiontxt": "Are you sure you want this?",
+        "yesbutton": "Yes",
+        "nobutton": "No",
+        "title_txt": "Lightbulb Game",
+        "resume_txt": "Resume",
+        "back_txt": "Back",
+        "quit_txt": "Quit",
+        "controls_txt": "Controls",
+        "settings_txt": "Settings",
+        "controlsR_txt": "- Forward \n- Backward \n- Left \n- Right \n- Menu / Exit \n- Pickup \n- TBD"
     }
 }

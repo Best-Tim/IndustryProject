@@ -28,6 +28,7 @@ public class Root
     public Menu menu { get; set; }
     public TutorialIntroduction tutorial_introduction { get; set; }
     public TutorialPopups tutorial_popups { get; set; }
+    public MenuIngame menu_ingame { get; set; }
 }
 
 public class TutorialIntroduction
@@ -44,4 +45,18 @@ public class TutorialPopups
     public string step3 { get; set; }
     public string step4 { get; set; }
     public string step5 { get; set; }
+}
+
+public class MenuIngame
+{
+    public string questiontxt { get; set; }
+    public string yesbutton { get; set; }
+    public string nobutton { get; set; }
+    public string title_txt { get; set; }
+    public string resume_txt { get; set; }
+    public string back_txt { get; set; }
+    public string quit_txt { get; set; }
+    public string controls_txt { get; set; }
+    public string settings_txt { get; set; }
+    public string controlsR_txt { get; set; }
 }

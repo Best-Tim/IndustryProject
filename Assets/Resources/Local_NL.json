@@ -17,5 +17,17 @@
         "step3": "Beweeg naar de aangegeven tafel.",
         "step4": "Pak het aangegeven object op en plaats het in de flagon.",
         "step5": "Goed gedaan! Je bent nu klaar met de tutorial"
+    },
+    "menu_ingame": {
+        "questiontxt": "Weet je zeker dat je wilt stoppen?",
+        "yesbutton": "Ja",
+        "nobutton": "Nee",
+        "title_txt": "Gloeilampen Spel",
+        "resume_txt": "Verdergaan",
+        "back_txt": "Terug",
+        "quit_txt": "Stoppen",
+        "controls_txt": "Controls",
+        "settings_txt": "Settings",
+        "controlsR_txt": "- Vooruit \n- Achteruit \n- Links \n- Rechts \n- Menu / Stoppen \n- Oppakken \n- TBD"
     }
 }
