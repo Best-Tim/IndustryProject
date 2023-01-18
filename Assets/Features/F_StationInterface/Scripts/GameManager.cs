@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         stations.AddRange(FindObjectsOfType<StationInterface>());
-        SingletonUI.Instance.SetNewGeraldUI("Welcome to the factory newbies! Today you and your collegue will learn how to build a lightbulb!", 5);
+        SingletonUI.Instance.SetNewGeraldUI(LocalizationManager.Instance.GetParsedLanguage.localization.factory.intro_txt, 5);
     }
 
 }

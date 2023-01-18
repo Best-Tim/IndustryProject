@@ -29,5 +29,8 @@
         "controls_txt": "Controls",
         "settings_txt": "Settings",
         "controlsR_txt": "- Vooruit \n- Achteruit \n- Links \n- Rechts \n- Menu / Stoppen \n- Oppakken \n- TBD"
+    },
+    "factory": {
+        "intro_txt": "Welkom in de fabriek nieuwelingen! Vandaag gaan jullie leren hoe je een gloeilamp maakt!"
     }
 }

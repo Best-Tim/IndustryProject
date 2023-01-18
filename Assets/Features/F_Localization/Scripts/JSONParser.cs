@@ -29,6 +29,7 @@ public class Root
     public TutorialIntroduction tutorial_introduction { get; set; }
     public TutorialPopups tutorial_popups { get; set; }
     public MenuIngame menu_ingame { get; set; }
+    public Factory factory { get; set; }
 }
 
 public class TutorialIntroduction
@@ -59,4 +60,9 @@ public class MenuIngame
     public string controls_txt { get; set; }
     public string settings_txt { get; set; }
     public string controlsR_txt { get; set; }
+}
+
+public class Factory
+{
+    public string intro_txt { get; set; }
 }

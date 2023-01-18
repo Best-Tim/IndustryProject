@@ -29,5 +29,8 @@
         "controls_txt": "Controls",
         "settings_txt": "Settings",
         "controlsR_txt": "- Forward \n- Backward \n- Left \n- Right \n- Menu / Exit \n- Pickup \n- TBD"
+    },
+    "factory": {
+        "intro_txt": "Welcome to the factory newbies! Today you and your colleague will learn how to build a lightbulb!"
     }
 }
