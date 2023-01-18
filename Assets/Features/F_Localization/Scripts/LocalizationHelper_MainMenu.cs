@@ -8,7 +8,7 @@ public class LocalizationHelper_MainMenu : MonoBehaviour {
     public TextMeshProUGUI start;
     public TextMeshProUGUI options;
     public TextMeshProUGUI quit;
-    public TextMeshProUGUI tutorial;
+    
 
     // Start is called before the first frame update
     void Awake() {
@@ -30,6 +30,6 @@ public class LocalizationHelper_MainMenu : MonoBehaviour {
         start.text = LocalizationManager.Instance.GetParsedLanguage.localization.menu.start_btn;
         options.text = LocalizationManager.Instance.GetParsedLanguage.localization.menu.controls_btn;
         quit.text = LocalizationManager.Instance.GetParsedLanguage.localization.menu.exit_btn;
-        tutorial.text = LocalizationManager.Instance.GetParsedLanguage.localization.menu.tutorial_btn;
+        
     }
 }
