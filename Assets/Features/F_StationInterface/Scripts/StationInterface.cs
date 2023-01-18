@@ -18,7 +18,7 @@ public abstract class StationInterface : MonoBehaviour
     {
         audioManager = FindObjectOfType<AudioManager>();
         isComplete = true;
-        audioManager.Play("CompleteStation2", false);
+        audioManager.Play("CompleteStation", false);
         SingletonUI.Instance.SetNewGeraldUI($"Good job completing {gameObject.name}! On to the next!",audioManager.GetSoundName("CompleteStation").audioClip.length);
         lightBulb.GetComponent<MeshRenderer>().material = glowMaterial;
         lightBulb.GetComponent<Light>().intensity = 2;

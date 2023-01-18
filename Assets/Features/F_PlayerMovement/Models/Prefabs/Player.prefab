@@ -100,7 +100,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1511306821297023168}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.13}
+  m_LocalPosition: {x: 0, y: 0, z: 1.303}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -384,6 +384,7 @@ MonoBehaviour:
     volume: 1
     pitch: 0
     audioSource: {fileID: 0}
+  tutorialSounds: []
 --- !u!1 &7934430208102344184
 GameObject:
   m_ObjectHideFlags: 0

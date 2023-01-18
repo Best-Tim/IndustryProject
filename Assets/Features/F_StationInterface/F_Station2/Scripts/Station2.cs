@@ -68,73 +68,78 @@ public class Station2 : StationInterface
     public override void WinCondition()
     {
         //CLEAN THIS CODE PLEASE YOUR SANITY DEPENDS ON IT
-        if (sequenceTracker == 1)
+        if (!isComplete)
         {
-            if (temperatureNormalized >= 30 && temperatureNormalized <= 60)
+            if (sequenceTracker == 1)
             {
-                if (timerFunctional > 0)
+                if (temperatureNormalized >= 30 && temperatureNormalized <= 60)
                 {
-                    timerFunctional -= Time.deltaTime;
+                    if (timerFunctional > 0)
+                    {
+                        timerFunctional -= Time.deltaTime;
+                    }
+                    else
+                    {
+                        timerFunctional = 0;
+                    }
+                    if (timerFunctional == 0)
+                    {
+                    
+                        completeStation();
+                    }
                 }
                 else
                 {
-                    timerFunctional = 0;
+                    timerFunctional = timerValue;
                 }
-                if (timerFunctional == 0)
+            }
+            if (sequenceTracker == 2)
+            {
+                if (temperatureNormalized >= 60 && temperatureNormalized <= 90)
                 {
+                    if (timerFunctional > 0)
+                    {
+                        timerFunctional -= Time.deltaTime;
+                    }
+                    else
+                    {
+                        timerFunctional = 0;
+                    }
+                    if (timerFunctional == 0)
+                    {
                     
-                    completeStation();
-                }
-            }
-            else
-            {
-                timerFunctional = timerValue;
-            }
-        }
-        if (sequenceTracker == 2)
-        {
-            if (temperatureNormalized >= 60 && temperatureNormalized <= 90)
-            {
-                if (timerFunctional > 0)
-                {
-                    timerFunctional -= Time.deltaTime;
+                        completeStation();
+                    }
                 }
                 else
                 {
-                    timerFunctional = 0;
-                }
-                if (timerFunctional == 0)
-                {
-                    
-                    completeStation();
+                    timerFunctional = timerValue;
                 }
             }
-            else
+
+            if (sequenceTracker == 3)
             {
-                timerFunctional = timerValue;
-            }
-        }
-        if (sequenceTracker == 3)
-        {
-            if (temperatureNormalized >= 90 && temperatureNormalized <= 120)
-            {
-                if (timerFunctional > 0)
+                if (temperatureNormalized >= 90 && temperatureNormalized <= 120)
                 {
-                    timerFunctional -= Time.deltaTime;
+                    if (timerFunctional > 0)
+                    {
+                        timerFunctional -= Time.deltaTime;
+                    }
+                    else
+                    {
+                        timerFunctional = 0;
+                    }
+
+                    if (timerFunctional == 0)
+                    {
+
+                        completeStation();
+                    }
                 }
                 else
                 {
-                    timerFunctional = 0;
+                    timerFunctional = timerValue;
                 }
-                if (timerFunctional == 0)
-                {
-                    
-                    completeStation();
-                }
-            }
-            else
-            {
-                timerFunctional = timerValue;
             }
         }
     }

@@ -121,6 +121,7 @@ public class PlayerPickUpController : MonoBehaviour
         {
             if (playerMovement.isLocked)
             {
+                currentStation.reset();
                 playerMovement.isLocked = false;
                 isAbleToPickup = false;
                 currentStation = null;
