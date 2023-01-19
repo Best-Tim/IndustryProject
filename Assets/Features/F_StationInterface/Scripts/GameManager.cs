@@ -12,9 +12,15 @@ public class GameManager : MonoBehaviour
         audioManager = FindObjectOfType<AudioManager>();
         stations.AddRange(FindObjectsOfType<StationInterface>());
         audioManager.Play("FactoryBackground", true);
-        audioManager.Play("WelcomeFactory", false);
-        SingletonUI.Instance.SetNewGeraldUI(
-            LocalizationManager.Instance.GetParsedLanguage.localization.factory.intro_txt, 5);
+        //audioManager.Play("WelcomeFactory", false);
+        StartCoroutine(audioManager.PlayWelcomingMessages());
+        SingletonUI.Instance.SetNewGeraldUI(LocalizationManager.Instance.GetParsedLanguage.localization.factory.intro_txt, audioManager.mainSceneIntroductionSounds[0].audioClip.length);
+        SingletonUI.Instance.SetNewGeraldUI(LocalizationManager.Instance.GetParsedLanguage.localization.factory.intro2_txt, audioManager.mainSceneIntroductionSounds[1].audioClip.length);
+
+    }
+    private void WelcomingMessages()
+    {
+
     }
 
 }

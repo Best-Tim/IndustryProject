@@ -65,4 +65,5 @@ public class MenuIngame
 public class Factory
 {
     public string intro_txt { get; set; }
+    public string intro2_txt { get; set; }
 }

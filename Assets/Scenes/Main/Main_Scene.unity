@@ -902,6 +902,34 @@ PrefabInstance:
       propertyPath: sounds.Array.data[14].audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 9ee3771875e09da4e864a4f45246f85d, type: 3}
+    - target: {fileID: 5469606342139288959, guid: 6e782f1803623c341823d66e788908c5, type: 3}
+      propertyPath: mainSceneIntroductionSounds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469606342139288959, guid: 6e782f1803623c341823d66e788908c5, type: 3}
+      propertyPath: mainSceneIntroductionSounds.Array.data[0].name
+      value: WelcomeFactory
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469606342139288959, guid: 6e782f1803623c341823d66e788908c5, type: 3}
+      propertyPath: mainSceneIntroductionSounds.Array.data[1].name
+      value: Success
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469606342139288959, guid: 6e782f1803623c341823d66e788908c5, type: 3}
+      propertyPath: mainSceneIntroductionSounds.Array.data[0].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469606342139288959, guid: 6e782f1803623c341823d66e788908c5, type: 3}
+      propertyPath: mainSceneIntroductionSounds.Array.data[1].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469606342139288959, guid: 6e782f1803623c341823d66e788908c5, type: 3}
+      propertyPath: mainSceneIntroductionSounds.Array.data[0].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b983ee2fa7454d341898c8aca5e653a1, type: 3}
+    - target: {fileID: 5469606342139288959, guid: 6e782f1803623c341823d66e788908c5, type: 3}
+      propertyPath: mainSceneIntroductionSounds.Array.data[1].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 607ff8cb275cd87409eb6cf586ee1196, type: 3}
     - target: {fileID: 7934430206801587808, guid: 6e782f1803623c341823d66e788908c5, type: 3}
       propertyPath: m_Name
       value: Player

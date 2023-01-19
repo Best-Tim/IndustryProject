@@ -8,15 +8,15 @@
     },
     "tutorial_introduction": {
         "step1": "Welcome to the tutorial of the Lightbulb Game!",
-        "step2": "Coming up there will be 5 steps that you will have to complete to finish the tutorial.",
+        "step2": "My name is Gerard Philips and I will teach you how to play!.",
         "step3": "Good luck!"
     },
     "tutorial_popups": {
         "step1": "Use the mouse to look at the lamps around the room to turn them on.",
-        "step2": "Uing your keyboard, press the 'W, A, S, D' keys to move around.",
-        "step3": "Now try to move towards the highlighted table and click on it.",
-        "step4": "Pick up the highlighted object and drop it in the vial.",
-        "step5": "Well done! You have now completed the tutorial."
+        "step2": "Using your keyboard, press the 'W, A, S, D' keys to move around.",
+        "step3": "Move towards the highlighted table and click on it.",
+        "step4": "Pick up the highlighted object and drop it in the bowl.",
+        "step5": "Good job! You have now completed the tutorial."
     },
     "menu_ingame": {
         "questiontxt": "Are you sure you want this?",
@@ -31,6 +31,7 @@
         "controlsR_txt": "- Forward \n- Backward \n- Left \n- Right \n- Menu / Exit \n- Pickup \n- TBD"
     },
     "factory": {
-        "intro_txt": "Welcome to the factory newbies! Today you and your colleague will learn how to build a lightbulb!"
+        "intro_txt": "Welcome to the factory trainees! Today you and your colleague will learn how to build a light bulb!",
+	  "intro2_txt": "Follow the steps written in the manual in order to succeed!" 	
     }
 }

@@ -154,8 +154,8 @@ public class TutorialManager : MonoBehaviour {
 
     private void ShowStepPopupText(int i) {
         if (!TutorialStepSetupIsDone) {
-            audioManager.PlaySoundsForTutorial(audioManager.tutorialSounds[i+1]);
-            SingletonUI.Instance.SetNewGeraldUI(popupTextList[i], audioManager.tutorialSounds[i+1].audioClip.length);
+            audioManager.PlaySoundsForTutorial(audioManager.tutorialSounds[i]);
+            SingletonUI.Instance.SetNewGeraldUI(popupTextList[i], audioManager.tutorialSounds[i].audioClip.length);
             #if UNITY_EDITOR_64
                         Debug.Log("Index: "+ popUpIndex);
                         Debug.Log("I: "+ i);
@@ -170,11 +170,18 @@ public class TutorialManager : MonoBehaviour {
     private void InstructionInitialize() {
         if (!setText) {
             SingletonUI.onMessageDone += InstructionsDone;
+            StartCoroutine(audioManager.PlaySoundsForIntroduction());
 
             foreach (string instruction in IntroductionText) {
-                audioManager.Play("WelcomeTutorial", false);
-               SingletonUI.Instance.SetNewGeraldUI(instruction,audioManager.GetSoundName("WelcomeTutorial").audioClip.length);
-            }           
+              SingletonUI.Instance.SetNewGeraldUI(instruction,audioManager.GetSoundName("WelcomeTutorial").audioClip.length);
+            }
+            //for (int i = 0; i < IntroductionText.Count; i++)
+            //{
+
+            //    audioManager.PlaySoundsForTutorial(audioManager.tutorialSounds[i]);
+            //    SingletonUI.Instance.SetNewGeraldUI(IntroductionText[i], audioManager.tutorialSounds[i].audioClip.length);
+
+            //}
             setText = true;
         }
     }    
