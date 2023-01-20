@@ -32,6 +32,6 @@
     },
     "factory": {
         "intro_txt": "Welcome to the factory trainees! Today you and your colleague will learn how to build a light bulb!",
-	  "intro2_txt": "Follow the steps written in the manual in order to succeed!" 	
+	    "intro2_txt": "Follow the steps written in the manual in order to succeed!" 	
     }
 }
