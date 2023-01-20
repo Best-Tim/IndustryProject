@@ -7,318 +7,224 @@ using UnityEngine;
 public class Station2 : StationInterface
 {
     private ClockHand hand;
+    private ParticleController particleController;
+    private OvenCollider OvenCollider;
+    private string[] particles = {"Fire","Smoke","Sparks"};
+    private bool UIPlayed = false;
+    private AudioManager audioManager;
 
+    //temperature so it's readable
     [SerializeField]
-    private Green green;
-
+    private int temperatureNormalized;
     [SerializeField]
-    private Station1 station1;
-
+    private float timerValue = 3f;
+    private float timerFunctional;
+    private int sequenceTracker;
     private void Start()
     {
-        hand = GetComponentInChildren<ClockHand>(); 
-        
+        hand = transform.parent.GetComponentInChildren<ClockHand>(); 
+        particleController = transform.parent.GetComponentInChildren<ParticleController>();
+        OvenCollider = gameObject.GetComponentInChildren<OvenCollider>(); 
+        timerFunctional = timerValue;
     }
     public override void lockCamera(PlayerMovement player)
     {
-        if (!isComplete)
+        audioManager = FindObjectOfType<AudioManager>();
+        if (!isComplete && !player.isLocked)
         {
+            audioManager.Play("OvenGreeting", false);
             base.lockCamera(player);
-            hand.StartClock();
+            if (!UIPlayed)
+            {
+                SingletonUI.Instance.SetNewGeraldUI("Oh so you are using the oven, careful sometimes it leaks...",audioManager.GetSoundName("OvenGreeting").audioClip.length +1f);
+            }
+            UIPlayed = true;
         }
     }
     private void Update()
     {
+        if (OvenCollider.carbonPlaced)
+        {
+            randomizedSequence();
+        }
+        //for testing
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            hand.StopLoop();
+            hand.ButtonPressed();
         }
         if (Input.GetKeyUp(KeyCode.Y))
         {
-            hand.StartLoop();
-            if (checkWinCon())
-            {
-                Debug.Log("you win");
-                base.completeStation();
-                hand.StopLoop();
-                green.MakeGreen();
-            }
-            else
-            {
-                green.MakeRed();
-                //explosion
-            }
+            hand.ButtonNotPressed();
         }
+        TranslateToDegrees();
+
+        WinCondition();
     }
     public override void reset()
     {
         hand.Reset();
+        OvenCollider.ResetOven();
     }
     public override void WinCondition()
     {
+        //CLEAN THIS CODE PLEASE YOUR SANITY DEPENDS ON IT
+        if (!isComplete)
+        {
+            if (sequenceTracker == 1)
+            {
+                if (temperatureNormalized >= 30 && temperatureNormalized <= 60)
+                {
+                    if (timerFunctional > 0)
+                    {
+                        timerFunctional -= Time.deltaTime;
+                    }
+                    else
+                    {
+                        timerFunctional = 0;
+                    }
+                    if (timerFunctional == 0)
+                    {
+                    
+                        completeStation();
+                    }
+                }
+                else
+                {
+                    timerFunctional = timerValue;
+                }
+            }
+            if (sequenceTracker == 2)
+            {
+                if (temperatureNormalized >= 60 && temperatureNormalized <= 90)
+                {
+                    if (timerFunctional > 0)
+                    {
+                        timerFunctional -= Time.deltaTime;
+                    }
+                    else
+                    {
+                        timerFunctional = 0;
+                    }
+                    if (timerFunctional == 0)
+                    {
+                    
+                        completeStation();
+                    }
+                }
+                else
+                {
+                    timerFunctional = timerValue;
+                }
+            }
+
+            if (sequenceTracker == 3)
+            {
+                if (temperatureNormalized >= 90 && temperatureNormalized <= 120)
+                {
+                    if (timerFunctional > 0)
+                    {
+                        timerFunctional -= Time.deltaTime;
+                    }
+                    else
+                    {
+                        timerFunctional = 0;
+                    }
+
+                    if (timerFunctional == 0)
+                    {
+
+                        completeStation();
+                    }
+                }
+                else
+                {
+                    timerFunctional = timerValue;
+                }
+            }
+        }
     }
-    private bool checkWinCon()
+    private void randomizedSequence()
     {
+        int r = Random.Range(0, particles.Length);
 
-        //int scale = station1.currentZinc.scale;
-
-        //remove hard coded int for station 1 reference when merged
-        int scale = 3;
-        if (scale == 3)
+        if (r == 0)
         {
-            //north
-            if (hand.random == 0)
-            {
-                if (checkHandPosition(1, 3))
-                {
-                    return false;
-                }
-                if (checkHandPosition(4, 6))
-                {
-                    return false;
-                }
-                if (checkHandPosition(7, 9))
-                {
-                    return false;
-                }
-                if (checkHandPosition(10, 12))
-                {
-                    return true;
-                }
-            }
-            //east
-            if (hand.random == 90)
-            {
-                if (checkHandPosition(1, 3))
-                {
-                    return false;
-                }
-                if (checkHandPosition(4, 6))
-                {
-                    return false;
-                }
-                if (checkHandPosition(7, 9))
-                {
-                    return true;
-                }
-                if (checkHandPosition(10, 12))
-                {
-                    return false;
-                }
-            }
-            //south
-            if (hand.random == 180)
-            {
-                if (checkHandPosition(1, 3))
-                {
-                    return false;
-                }
-                if (checkHandPosition(4, 6))
-                {
-                    return true;
-                }
-                if (checkHandPosition(7, 9))
-                {
-                    return false;
-                }
-                if (checkHandPosition(10, 12))
-                {
-                    return false;
-                }
-            }
-            //west
-            if (hand.random == 270)
-            {
-                if (checkHandPosition(1, 3))
-                {
-                    return true;
-                }
-                if (checkHandPosition(4, 6))
-                {
-                    return false;
-                }
-                if (checkHandPosition(7, 9))
-                {
-                    return false;
-                }
-                if (checkHandPosition(10, 12))
-                {
-                    return false;
-                }
-            }
+            particleController.PlayParticleSequence("Fire", "Smoke", "Sparks");
+            sequenceTracker = 1;
         }
-        if (scale == 2)
+        if (r == 1)
         {
-            //north
-            if (hand.random == 0)
-            {
-                if (checkHandPosition(1, 3))
-                {
-                    return true;
-                }
-                if (checkHandPosition(4, 6))
-                {
-                    return false;
-                }
-                if (checkHandPosition(7, 9))
-                {
-                    return false;
-                }
-                if (checkHandPosition(10, 12))
-                {
-                    return false;
-                }
-            }
-            //east
-            if (hand.random == 90)
-            {
-                if (checkHandPosition(1, 3))
-                {
-                    return false;
-                }
-                if (checkHandPosition(4, 6))
-                {
-                    return true;
-                }
-                if (checkHandPosition(7, 9))
-                {
-                    return false;
-                }
-                if (checkHandPosition(10, 12))
-                {
-                    return false;
-                }
-            }
-            //south
-            if (hand.random == 180)
-            {
-                if (checkHandPosition(1, 3))
-                {
-                    return false;
-                }
-                if (checkHandPosition(4, 6))
-                {
-                    return false;
-                }
-                if (checkHandPosition(7, 9))
-                {
-                    return true;
-                }
-                if (checkHandPosition(10, 12))
-                {
-                    return false;
-                }
-            }
-            //west
-            if (hand.random == 270)
-            {
-                if (checkHandPosition(1, 3))
-                {
-                    return false;
-                }
-                if (checkHandPosition(4, 6))
-                {
-                    return false;
-                }
-                if (checkHandPosition(7, 9))
-                {
-                    return false;
-                }
-                if (checkHandPosition(10, 12))
-                {
-                    return true;
-                }
-            }
+            particleController.PlayParticleSequence("Smoke", "Sparks", "Fire");
+            sequenceTracker = 2;
         }
-        if (scale == 1)
+        if (r == 2)
         {
-            //north
-            if (hand.random == 0)
-            {
-                if (checkHandPosition(1, 3))
-                {
-                    return false;
-                }
-                if (checkHandPosition(4, 6))
-                {
-                    return false;
-                }
-                if (checkHandPosition(7, 9))
-                {
-                    return true;
-                }
-                if (checkHandPosition(10, 12))
-                {
-                    return false;
-                }
-            }
-            //east
-            if (hand.random == 90)
-            {
-                if (checkHandPosition(1, 3))
-                {
-                    return false;
-                }
-                if (checkHandPosition(4, 6))
-                {
-                    return false;
-                }
-                if (checkHandPosition(7, 9))
-                {
-                    return false;
-                }
-                if (checkHandPosition(10, 12))
-                {
-                    return true;
-                }
-            }
-            //south
-            if (hand.random == 180)
-            {
-                if (checkHandPosition(1, 3))
-                {
-                    return false;
-                }
-                if (checkHandPosition(4, 6))
-                {
-                    return true;
-                }
-                if (checkHandPosition(7, 9))
-                {
-                    return false;
-                }
-                if (checkHandPosition(10, 12))
-                {
-                    return false;
-                }
-            }
-            //west
-            if (hand.random == 270)
-            {
-                if (checkHandPosition(1, 3))
-                {
-                    return true;
-                }
-                if (checkHandPosition(4, 6))
-                {
-                    return false;
-                }
-                if (checkHandPosition(7, 9))
-                {
-                    return false;
-                }
-                if (checkHandPosition(10, 12))
-                {
-                    return false;
-                }
-            }
+            particleController.PlayParticleSequence("Sparks", "Fire", "Smoke");
+            sequenceTracker = 3;
         }
-        return false;
+        OvenCollider.carbonPlaced = false;
     }
-
-    public bool checkHandPosition(int firstInclusive, int lastInclusive)
+    //clean this, maybe loop with presets and increase counter by 15 intervals
+    private void TranslateToDegrees()
+    {   
+        //-135 = 15
+        if (checkTempHandBetween(15,16))
+        {
+            SetNormalizedTemp(0);
+        }
+        //-105 = 17
+        if (checkTempHandBetween(17,18))
+        {
+            SetNormalizedTemp(15);
+        }
+        //-75 = 19
+        if (checkTempHandBetween(19, 20))
+        {
+            SetNormalizedTemp(30);
+        }
+        //-45 = 21
+        if (checkTempHandBetween(21, 22))
+        {
+            SetNormalizedTemp(45);
+        }
+        //-15 = 23
+        if (checkTempHandBetween(23, 24))
+        {
+            SetNormalizedTemp(60);
+        }
+        // 15 = 1
+        if (checkTempHandBetween(1, 2))
+        {
+            SetNormalizedTemp(75);
+        }
+        // 45 = 3
+        if (checkTempHandBetween(3, 4))
+        {
+            SetNormalizedTemp(90);
+        }
+        // 75 = 5
+        if (checkTempHandBetween(5, 6))
+        {
+            SetNormalizedTemp(105);
+        }
+        //105 = 7
+        if (checkTempHandBetween(7, 8))
+        {
+            SetNormalizedTemp(120);
+        }
+        //135 = 9
+        if (checkTempHandBetween(9, 10))
+        {
+            SetNormalizedTemp(135);
+        }
+    }
+    private void SetNormalizedTemp(int n)
     {
-        if (hand.hourClock >= firstInclusive && hand.hourClock <= lastInclusive)
+        temperatureNormalized = n;
+    }
+    public bool checkTempHandBetween(int firstInclusive, int lastInclusive)
+    {
+        if (hand.Temp >= firstInclusive && hand.Temp <= lastInclusive)
         {
             return true;
         }

@@ -13,11 +13,13 @@ public class PlayerMovement : MonoBehaviour
 
     public bool isLocked;
     public bool isInMenu;
+    private AudioManager audioManager;
 
     private void Awake()
     {
         isLocked = false;
         isInMenu = false;
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     private void Update()
@@ -34,6 +36,23 @@ public class PlayerMovement : MonoBehaviour
             velocity.y += gravity * Time.deltaTime;
 
             controller.Move(velocity * Time.deltaTime);
+
+            if (x != 0 || z != 0 )
+            {
+                if (!audioManager.GetSoundName("Footsteps").audioSource.isPlaying && !isLocked)
+                {
+                    audioManager.Play("Footsteps", true);
+                }
+            }
+            else
+            {
+                audioManager.Stop("Footsteps");
+            }
+
+            if (GetComponent<PlayerPickUpController>().currentStation != null)
+            {
+                audioManager.Stop("Footsteps");
+            }
         }
     }
 }

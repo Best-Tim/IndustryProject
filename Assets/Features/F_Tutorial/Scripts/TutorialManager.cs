@@ -11,13 +11,15 @@ public class TutorialManager : MonoBehaviour {
     //Popup variables
     [SerializeField] private Transform popup_holder;
     [SerializeField] private int popUpIndex;
+    private int InstructionCount;
+    private bool TutorialStepSetupIsDone = false;
     [Header("References")]
     //References to scene objects
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private Transform lights;
     [SerializeField] private GameObject desk;
     [SerializeField] private Station1 station1;
-    
+    [SerializeField] private Light mainLight;
     [Header("Material")]
     //Material for the table objects
     [SerializeField] private Material cotton;
@@ -34,13 +36,17 @@ public class TutorialManager : MonoBehaviour {
     private List<string> popupTextList;
 
     PlayerCam playerCam;
+    private AudioManager audioManager;
 
     private void Start() {
+        audioManager = FindObjectOfType<AudioManager>();       
+
         playerCam = FindObjectOfType<PlayerCam>();
         popUpIndex = 0;
         keysPressed = new List<string>();
         targetsLookedAt = new List<GameObject>();
         playerMovement.isInMenu = true;
+        PopulateWelcome();
         PopulatePopups();
         #if UNITY_EDITOR
                 popUpIndex = skipToStep;
@@ -49,13 +55,31 @@ public class TutorialManager : MonoBehaviour {
         #endif
     }
 
+    public void PopulateWelcome() {
+        var localizationTutorial = LocalizationManager.Instance.GetParsedLanguage.localization.tutorial_introduction;
+        IntroductionText.Add(localizationTutorial.step1);
+        IntroductionText.Add(localizationTutorial.step2);
+        IntroductionText.Add(localizationTutorial.step3);
+    }
+
     public void PopulatePopups() {
+        var localizationTutorial = LocalizationManager.Instance.GetParsedLanguage.localization.tutorial_popups;
+        popupTextList.Add(localizationTutorial.step1);
+        popupTextList.Add(localizationTutorial.step2);
+        popupTextList.Add(localizationTutorial.step3);
+        popupTextList.Add(localizationTutorial.step4);
+        popupTextList.Add(localizationTutorial.step5);
         int maxLength = Mathf.Min(popupTextList.Count, popup_holder.childCount);
         for (int i = 0; i < maxLength; i++) {
             popup_holder.GetChild(i).GetComponent<TextMeshProUGUI>().text = popupTextList[i];
         }
     }
-
+    /*
+     * Setting up the Geralt UI singleton:
+     * First Variable is for the text that shows up in the dialogue box
+     * Second Variable is the duration it will show up for
+     * SingletonUI.Instance.SetNewGeraldUI("Text", 1);
+     */
     void Update() 
     {
         for (int i = 0; i < popup_holder.childCount; i++) {
@@ -67,40 +91,106 @@ public class TutorialManager : MonoBehaviour {
             }
         }
 
-        if (popUpIndex == 0) {
-            //Popup 1 will be the camera / look controls
-            CameraLookTutorial();
-        }
+        switch (popUpIndex) {
+            case 0:
+                //Start up the instruction text
 
-        if (popUpIndex == 1) {
-            //Popup 2 will be the movement tutorial
-            playerMovement.isInMenu = false;
-            MovementTutorial();
-        }
+                InstructionInitialize();
+                if (InstructionCount >= IntroductionText.Count) {
+                    popUpIndex++;
+                }
+                break;
+            
+            case 1:
+                //Popuptextbox with geralt
+                ShowStepPopupText(0);
+                
+                //Popup 1 will be the camera / look controls
+                CameraLookTutorial();
+                break;
+            
+            case 2:
+                //Popuptextbox with geralt
+                ShowStepPopupText(1);
+                
+                //Popup 2 will be the movement tutorial
+                playerMovement.isInMenu = false;
+                MovementTutorial();
+                break;
+            
+            case 3:
+                //Popuptextbox with geralt
+                ShowStepPopupText(2);
+                
+                //Popup 3 will be walking up to the station and locking yourself in place
+                if (desk.TryGetComponent(out DeskTutorial deskTutorial)) {
+                    deskTutorial.EnableTutorial();
+                    DeskLockTutorial(deskTutorial);
+                }
+                break;
+            
+            case 4:
+                //Popuptextbox with geralt
+                ShowStepPopupText(3);
+                
+                //Popup 4 will be about moving around objects
+                StationInteractableTutorial();
+                break;
+            
+            case 5:
+                //Popuptextbox with geralt
+                ShowStepPopupText(4);
 
-        if (popUpIndex == 2) {
-            //Popup 3 will be walking up to the station and locking yourself in place
-            if (desk.TryGetComponent(out DeskTutorial deskTutorial)) {
-                deskTutorial.EnableTutorial();
-                DeskLockTutorial(deskTutorial);
+                //Popup 5 will be the victory screen
+                StartCoroutine(LoadNextSceneWithWait());
+                break;
+        }
+    }
+    private IEnumerator LoadNextSceneWithWait()
+    {
+        yield return new WaitForSeconds(7f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
+
+    private void ShowStepPopupText(int i) {
+        if (!TutorialStepSetupIsDone) {
+            audioManager.PlaySoundsForTutorial(audioManager.tutorialSounds[i]);
+            SingletonUI.Instance.SetNewGeraldUI(popupTextList[i], audioManager.tutorialSounds[i].audioClip.length);
+            #if UNITY_EDITOR_64
+                        Debug.Log("Index: "+ popUpIndex);
+                        Debug.Log("I: "+ i);
+                        Debug.Log("Message: "+ popupTextList[i]);
+            #endif
+            TutorialStepSetupIsDone = true;
+        }
+    }
+
+    [SerializeField] private List<string> IntroductionText;
+    bool setText = false;
+    private void InstructionInitialize() {
+        if (!setText) {
+            SingletonUI.onMessageDone += InstructionsDone;
+            StartCoroutine(audioManager.PlaySoundsForIntroduction());
+
+            foreach (string instruction in IntroductionText) {
+              SingletonUI.Instance.SetNewGeraldUI(instruction,audioManager.GetSoundName("WelcomeTutorial").audioClip.length);
             }
+            //for (int i = 0; i < IntroductionText.Count; i++)
+            //{
+
+            //    audioManager.PlaySoundsForTutorial(audioManager.tutorialSounds[i]);
+            //    SingletonUI.Instance.SetNewGeraldUI(IntroductionText[i], audioManager.tutorialSounds[i].audioClip.length);
+
+            //}
+            setText = true;
         }
-        
-        if (popUpIndex == 3) {
-            //Popup 4 will be about moving around objects
-            StationInteractableTutorial();
-        }
-        
-        if (popUpIndex == 4) {
-            //Popup 5 will be the victory screen
-            playerMovement.isInMenu = true;
-        }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            QuestionUIPopup.Instance.ShowQuestion("Are you sure you want to quit the game?", () => { SceneManager.LoadScene("Main_Menu"); }, () => { playerCam.isLocked = false; });
-            playerCam.isLocked = true;
-         
-        }
+    }    
+
+    private void InstructionsDone(object o, int i) {
+        Debug.Log("Event Evoked");
+        popUpIndex++;
+        TutorialStepSetupIsDone = false;
+        SingletonUI.onMessageDone -= InstructionsDone;
     }
 
     private bool setShaders;
@@ -110,9 +200,8 @@ public class TutorialManager : MonoBehaviour {
 
         if (station1.currentZinc.currentCottons.Count >= 2) {
             popUpIndex++;
+            TutorialStepSetupIsDone = false;
         }
-
-        
     }
 
     private void AddShaderToObject(List<GameObject> objects) {
@@ -131,19 +220,24 @@ public class TutorialManager : MonoBehaviour {
         if (playerMovement.isLocked) {
             popUpIndex++;
             deskTutorial.DisableTutorial();
+            TutorialStepSetupIsDone = false;
         }
     }
-
     private void CameraLookTutorial() {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit, 100)) {
             if (hit.transform.TryGetComponent(out LookTutorialTarget lookTutorialTarget)) {
                 if (lookTutorialTarget.IsLookedAt()) {
-                    targetsLookedAt.Add(hit.transform.gameObject); 
+                    targetsLookedAt.Add(hit.transform.gameObject);
+                    audioManager.Play("LightOn", false);
                 }
             }
         }
-        if (targetsLookedAt.Count == lights.childCount) { popUpIndex++; }
+        if (targetsLookedAt.Count == lights.childCount) { 
+            popUpIndex++; 
+            mainLight.enabled = true; 
+            TutorialStepSetupIsDone = false;
+        }
     }
 
     private void MovementTutorial() {
@@ -155,6 +249,7 @@ public class TutorialManager : MonoBehaviour {
         //action to do for first popup
         if (keysPressed.Contains("W") && keysPressed.Contains("A") && keysPressed.Contains("S") && keysPressed.Contains("D")) {
             popUpIndex++;
+            TutorialStepSetupIsDone = false;
         }
     }
 

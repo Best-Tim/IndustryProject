@@ -100,7 +100,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1511306821297023168}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.13}
+  m_LocalPosition: {x: 0, y: 0, z: 1.303}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -221,6 +221,7 @@ GameObject:
   - component: {fileID: 7934430206801587805}
   - component: {fileID: 2098671024162970801}
   - component: {fileID: 500539540643169389}
+  - component: {fileID: 5469606342139288959}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -304,6 +305,86 @@ MonoBehaviour:
   rotationSensitivity: 300
   rotateObject: {fileID: 0}
   heldObjTransform: {fileID: 2635578419541230606}
+  currentStation: {fileID: 0}
+--- !u!114 &5469606342139288959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7934430206801587808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba0705a4c4953ea4fa9844ff955879fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: StirLiquid
+    audioClip: {fileID: 8300000, guid: 0e7684c8fde7263408cc98e94a1b96c0, type: 3}
+    volume: 0.5
+    pitch: 0
+    audioSource: {fileID: 0}
+  - name: Splash
+    audioClip: {fileID: 8300000, guid: 393467ded3ceca84cb99a4354e7fff89, type: 3}
+    volume: 0.5
+    pitch: 0
+    audioSource: {fileID: 0}
+  - name: Explosion
+    audioClip: {fileID: 8300000, guid: f0d75528ecd75d9408019da87a6d97a5, type: 3}
+    volume: 0.5
+    pitch: 0
+    audioSource: {fileID: 0}
+  - name: LightOn
+    audioClip: {fileID: 8300000, guid: bb8c2827dc8e31c42aae1d62b95ad949, type: 3}
+    volume: 0.5
+    pitch: 0
+    audioSource: {fileID: 0}
+  - name: FIRE
+    audioClip: {fileID: 8300000, guid: f51958613b4b1d74184822613dcba9b4, type: 3}
+    volume: 0.3
+    pitch: 0
+    audioSource: {fileID: 0}
+  - name: SMOKE
+    audioClip: {fileID: 8300000, guid: 1a80165e5d0c4334f8ea456caeea4260, type: 3}
+    volume: 0.3
+    pitch: 0
+    audioSource: {fileID: 0}
+  - name: SPARKS
+    audioClip: {fileID: 8300000, guid: e37b501459047c34891cb05666572277, type: 3}
+    volume: 0.3
+    pitch: 0
+    audioSource: {fileID: 0}
+  - name: Scale
+    audioClip: {fileID: 8300000, guid: c3f80501153820b4da2af6a9885e66fb, type: 3}
+    volume: 0.5
+    pitch: 0
+    audioSource: {fileID: 0}
+  - name: ScaleDown
+    audioClip: {fileID: 8300000, guid: 7f7c3c467265529468ba1eaddf921bf1, type: 3}
+    volume: 0.5
+    pitch: 0
+    audioSource: {fileID: 0}
+  - name: Footsteps
+    audioClip: {fileID: 8300000, guid: ab28124718a363a4187052de753fb1e7, type: 3}
+    volume: 0.5
+    pitch: 0
+    audioSource: {fileID: 0}
+  - name: LockToStation
+    audioClip: {fileID: 8300000, guid: 0bcd61876606a6140ad0ee471dfaffc9, type: 3}
+    volume: 0.5
+    pitch: 0
+    audioSource: {fileID: 0}
+  - name: OvenGreeting
+    audioClip: {fileID: 8300000, guid: 0adb3b55af7aa624087ffe5047811d9b, type: 3}
+    volume: 1
+    pitch: 0
+    audioSource: {fileID: 0}
+  - name: CompleteStation2
+    audioClip: {fileID: 8300000, guid: 04e053a0362810a449c4b1617ad6583d, type: 3}
+    volume: 1
+    pitch: 0
+    audioSource: {fileID: 0}
+  tutorialSounds: []
 --- !u!1 &7934430208102344184
 GameObject:
   m_ObjectHideFlags: 0

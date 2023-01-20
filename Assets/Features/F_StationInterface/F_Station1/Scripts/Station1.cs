@@ -1,12 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Station1 : StationInterface
 {
     public List<GameObject> Materials = new List<GameObject>();
     public List<GameObject> zincBowls;
+    public List<GameObject> availableMaterials;
 
     public ZincScale currentZinc;
     public List<GameObject> currentMaterials;
@@ -18,10 +21,17 @@ public class Station1 : StationInterface
 
     public CheckWinCondition button;
     private Color colorToWin;
-    private void Start()
+
+    private bool isFinished;
+
+    public GameObject stirringHandlePrefab;
+    public GameObject stirringHandleSpawnPos;
+    private GameObject stirringHandle;
+
+    private void Awake()
     {
-       SpawnObjects();
-       FindRightAnswer();
+        isFinished = false;
+        SpawnObjects();
     }
     void FixedUpdate()
     {
@@ -42,21 +52,26 @@ public class Station1 : StationInterface
             Destroy(currentMaterials[i]);
         }
         Destroy(currentZinc.gameObject);
+        Destroy(stirringHandle);
         SpawnObjects();
     }
     void SpawnObjects()
     {
         currentMaterials = new List<GameObject>();
-        // currentZinc = new GameObject();
+        availableMaterials = new List<GameObject>();
+        availableMaterials.AddRange(Materials);
         foreach (Transform t in cottonParent.transform.GetComponentInChildren<Transform>())
         {
-            int i = Random.Range(0, Materials.Count);
-            GameObject g = Instantiate(Materials[i], t.position, Quaternion.identity, gameObject.transform.parent); 
-            Materials.RemoveAt(i);
+            int i = Random.Range(0, availableMaterials.Count);
+            GameObject g = Instantiate(availableMaterials[i], t.position, gameObject.transform.rotation, gameObject.transform.parent); 
+            availableMaterials.RemoveAt(i);
             currentMaterials.Add(g);
         }
-        GameObject zinc = Instantiate(zincBowls[Random.Range(0,zincBowls.Count)], zincLocation.position, Quaternion.identity, gameObject.transform.parent);
+        GameObject zinc = Instantiate(zincBowls[Random.Range(0,zincBowls.Count)], zincLocation.position, gameObject.transform.rotation, gameObject.transform.parent);
         currentZinc = zinc.GetComponent<ZincScale>();
+        stirringHandle = Instantiate(stirringHandlePrefab, stirringHandleSpawnPos.transform.position,
+            stirringHandleSpawnPos.transform.rotation);
+        FindRightAnswer();
     }
     void FindRightAnswer()
     {
@@ -75,30 +90,34 @@ public class Station1 : StationInterface
         if (rightAnswer == 0)
         {
             Debug.LogError("i dont know but something bad happened");
-            return;
         }
     }
     public override void WinCondition()
     {
         if (currentZinc.currentCottonCount == rightAnswer)
         {
-            if (rightAnswer == 3 && currentZinc.currentColor == Color.red)
+            if (rightAnswer == 3 && currentZinc.currentColor == "RED")
             {
                 completeStation();
-                Debug.Log("I won R");
+                isFinished = true;
 
             }
-            if (rightAnswer == 4 && currentZinc.currentColor == Color.blue)
+            if (rightAnswer == 4 && currentZinc.currentColor == "BLUE")
             {
                 completeStation();
-                Debug.Log("I won B");
+                isFinished = true;
 
             }
-            if (rightAnswer == 5 && currentZinc.currentColor == Color.green)
+            if (rightAnswer == 5 && currentZinc.currentColor == "GREEN")
             {
                 completeStation();
-                Debug.Log("I won G");
+                isFinished = true;
             }
+        }
+        else if (!isFinished)
+        {
+            reset();
+            currentZinc.Explode();
         }
     }
     int CottonSwitch(int scale)

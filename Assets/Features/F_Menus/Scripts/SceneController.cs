@@ -19,4 +19,8 @@ public class SceneController : MonoBehaviour
     {
         Application.Quit();
     }    
+    public void OpenLink(string s)
+    {
+        Application.OpenURL($"{s}");
+    }
 }
